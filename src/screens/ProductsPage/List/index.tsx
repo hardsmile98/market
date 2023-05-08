@@ -3,7 +3,7 @@ import { useGetProductsQuery } from '#/src/services/api';
 import { Grid, Skeleton } from '@mui/material';
 import Product from '#/src/components/Product';
 
-function Products() {
+function List() {
   const { isLoading, data } = useGetProductsQuery(null);
   const { items = [] } = data || {};
 
@@ -37,4 +37,4 @@ function Products() {
   );
 }
 
-export default Products;
+export default List;

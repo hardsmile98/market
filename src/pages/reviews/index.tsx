@@ -1,33 +1,7 @@
-import { Back } from '#/src/components';
-import Reviews from '#/src/screens/Reviews';
-import { Box, Button, Typography } from '@mui/material';
+import ReviewsPage from '#/src/screens/ReviewsPage';
 
 function Page() {
-  return (
-    <>
-      <Box mb={2}>
-        <Back />
-      </Box>
-
-      <Typography variant="h5">
-        Отзывы магазина
-      </Typography>
-
-      <Box my={3}>
-        <Reviews />
-      </Box>
-
-      <Box
-        display="flex"
-        justifyContent="center"
-        mb={3}
-      >
-        <Button>
-          Оставить отзыв о магазине
-        </Button>
-      </Box>
-    </>
-  );
+  return <ReviewsPage />;
 }
 
 export default Page;

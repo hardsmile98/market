@@ -7,7 +7,7 @@ import {
   Typography,
 } from '@mui/material';
 import Carousel from 'nuka-carousel';
-import Product from '../Product';
+import Product from '../../../components/Product';
 
 interface IProps {
     id?: string
