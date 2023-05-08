@@ -17,7 +17,7 @@ const styles = {
   },
 
   input: {
-    backgroundColor: 'white',
+    backgroundColor: 'background.paper',
     borderRadius: 6,
     width: ['100%', 'auto'],
 

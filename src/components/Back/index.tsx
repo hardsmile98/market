@@ -3,7 +3,12 @@ import Link from 'next/link';
 import { KeyboardArrowLeft as Arrow } from '@mui/icons-material';
 import React from 'react';
 
-function Back() {
+interface IProps {
+  href?: string
+  text?: string
+}
+
+function Back({ text, href }: IProps) {
   return (
     <Box sx={{
       a: {
@@ -16,9 +21,9 @@ function Back() {
       },
     }}
     >
-      <Link href="/">
+      <Link href={href || '/'}>
         <Arrow />
-        Назад
+        {text || 'Назад'}
       </Link>
     </Box>
   );

@@ -18,7 +18,7 @@ const styles = {
     width: [45, 45, 50],
     height: [45, 45, 50],
     border: 'none',
-    backgroundColor: '#FF6A55',
+    backgroundColor: 'secondary.light',
   },
 };
 

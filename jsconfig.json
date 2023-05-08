@@ -20,6 +20,9 @@
             "reducers/*": [
                 "client/src/reducers/*"
             ],
+            "screens/*": [
+                "client/src/screens/*"
+            ],
             "src/*": [
                 "client/src/*"
             ],

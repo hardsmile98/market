@@ -8,7 +8,7 @@ interface IProps {
     id?: string
 }
 
-function Information({ id }: IProps) {
+function Detail({ id }: IProps) {
   const { data, isLoading } = useGetProductQuery({ id: String(id) });
   const { item } = data || {};
 
@@ -63,4 +63,4 @@ function Information({ id }: IProps) {
   );
 }
 
-export default Information;
+export default Detail;

@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { Banner, Products } from '../components';
+import Products from '#/src/screens/Products';
+import { Banner } from '../components';
 
 function Page() {
   return (

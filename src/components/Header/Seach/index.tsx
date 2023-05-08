@@ -1,17 +1,28 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useGetProductsQuery } from '#/src/services/api';
 import { Search as SearchIcon } from '@mui/icons-material';
-import { Autocomplete, InputAdornment, TextField } from '@mui/material';
+import {
+  Autocomplete, Box, InputAdornment, TextField,
+} from '@mui/material';
+import Link from 'next/link';
 
 const styles = {
   root: {
     width: '100%',
-    backgroundColor: 'white',
+    backgroundColor: 'background.paper',
     borderRadius: 6,
     px: 1.5,
 
     fieldset: {
       display: 'none',
+    },
+  },
+
+  link: {
+    a: {
+      width: '100%',
+      color: 'inherit',
+      textDecoration: 'none',
     },
   },
 };
@@ -23,17 +34,26 @@ function Search() {
   return (
     <Autocomplete
       freeSolo
-      disableClearable
       sx={styles.root}
-      options={items.map((option) => option.title)}
+      options={items}
+      getOptionLabel={(option) => (typeof option === 'string'
+        ? option
+        : option.title)}
       loading={isLoading}
+      renderOption={(props, option) => (
+        <Box component="li" sx={styles.link} {...props}>
+          <Link href={`/${option.id}`}>
+            {option.title}
+          </Link>
+        </Box>
+      )}
       renderInput={(params) => (
         <TextField
           {...params}
           placeholder="Введите название товара"
           InputProps={{
             ...params.InputProps,
-            endAdornment: (
+            startAdornment: (
               <InputAdornment position="start">
                 <SearchIcon />
               </InputAdornment>

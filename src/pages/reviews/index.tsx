@@ -1,4 +1,5 @@
-import { Back, Reviews } from '#/src/components';
+import { Back } from '#/src/components';
+import Reviews from '#/src/screens/Reviews';
 import { Box, Button, Typography } from '@mui/material';
 
 function Page() {

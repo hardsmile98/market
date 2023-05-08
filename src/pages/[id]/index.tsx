@@ -1,14 +1,13 @@
-import { Information, Recommends, Back } from '#/src/components';
+import { Recommends, Back } from '#/src/components';
 import { Box } from '@mui/material';
+import Detail from '#/src/screens/Detail';
+import { useRouter } from 'next/router';
 
-interface IProps {
-  params?: {
-    id?: string;
-  };
-}
+function Page() {
+  const { query } = useRouter();
+  const { id } = query;
 
-function Page({ params }: IProps) {
-  const { id } = params || {};
+  const formattedID = String(id);
 
   return (
     <>
@@ -17,11 +16,11 @@ function Page({ params }: IProps) {
       </Box>
 
       <Box mb={5}>
-        <Information id={id} />
+        <Detail id={formattedID} />
       </Box>
 
       <Box mb={5}>
-        <Recommends id={id} />
+        <Recommends id={formattedID} />
       </Box>
     </>
   );

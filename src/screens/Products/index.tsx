@@ -1,7 +1,7 @@
 /* eslint-disable react/no-array-index-key */
 import { useGetProductsQuery } from '#/src/services/api';
 import { Grid, Skeleton } from '@mui/material';
-import Product from '../Product';
+import Product from '#/src/components/Product';
 
 function Products() {
   const { isLoading, data } = useGetProductsQuery(null);
