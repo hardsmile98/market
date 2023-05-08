@@ -1,4 +1,4 @@
-import { Product } from '#/src/types';
+import { Product as IPropduct } from '#/src/types';
 import {
   Box,
   Button,
@@ -11,7 +11,7 @@ import Link from 'next/link';
 import styles from './styles';
 
 interface IProps {
-    product: Product
+    product: IPropduct
 }
 
 function Product({ product } : IProps) {

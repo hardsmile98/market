@@ -5,7 +5,7 @@ import React from 'react';
 
 interface IProps {
   images: Array<string>
-};
+}
 
 const styles = {
   image: {
@@ -50,7 +50,7 @@ function Slider({ images }: IProps) {
         </Box>
       )}
     >
-      {images.map(image => (
+      {images.map((image) => (
         <Box
           key={image}
           component="img"

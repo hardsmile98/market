@@ -1,5 +1,4 @@
-'use client';
-
+/* eslint-disable react/destructuring-assignment */
 import { Component, ReactNode, ErrorInfo } from 'react';
 
 interface IProps {

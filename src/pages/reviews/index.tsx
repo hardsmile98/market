@@ -1,5 +1,3 @@
-'use client';
-
 import { Back, Reviews } from '#/src/components';
 import { Box, Button, Typography } from '@mui/material';
 

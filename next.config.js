@@ -5,10 +5,6 @@ const nextConfig = {
   swcMinify: true,
   output: 'standalone',
 
-  experimental: {
-    appDir: true,
-  },
-
   env: {
 
   },

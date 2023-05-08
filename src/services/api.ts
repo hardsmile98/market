@@ -1,32 +1,30 @@
 import {
-  createApi, fetchBaseQuery, FetchArgs, BaseQueryApi,
+  createApi, fetchBaseQuery, retry,
 } from '@reduxjs/toolkit/query/react';
+import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
 import { ProductQuery, Products } from '../types';
 import {
   transformGetReviews,
 } from './transformResponse';
 
-const customBaseQuery = async (
-  args: string | FetchArgs,
-  api: BaseQueryApi,
-  extraOptions : {[x: string]: unknown},
-) => {
-  const baseQuery = fetchBaseQuery({
-    baseUrl: `${API_URL}/v1`,
-    credentials: 'include',
-  });
-
-  const result = await baseQuery(args, api, extraOptions);
-
-  return result;
-};
-
 export const api = createApi({
   reducerPath: 'api',
 
-  baseQuery: customBaseQuery,
+  baseQuery: retry(
+    fetchBaseQuery({
+      baseUrl: `${API_URL}/v1`,
+      credentials: 'include',
+    }),
+    { maxRetries: 2 },
+  ),
 
+  // eslint-disable-next-line consistent-return
+  extractRehydrationInfo(action, { reducerPath }) {
+    if (action.type === HYDRATE) {
+      return action.payload[reducerPath];
+    }
+  },
   endpoints: (builder) => ({
     GetReviews: builder.query({
       query: () => ({
@@ -56,3 +54,9 @@ export const {
   useGetProductsQuery,
   useGetProductQuery,
 } = api;
+
+export const {
+  GetProduct,
+  GetProducts,
+  GetReviews,
+} = api.endpoints;

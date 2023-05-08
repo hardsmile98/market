@@ -4,7 +4,7 @@ import type {
 import moment from 'moment';
 
 const transformGetBranches = (response: Reviews) => ({
-  items: response.items.map(item => ({ ...item, createAt: moment(item.createAt).format('LLL') })),
+  items: response.items.map((item) => ({ ...item, createAt: moment(item.createAt).format('LLL') })),
 });
 
 export default transformGetBranches;

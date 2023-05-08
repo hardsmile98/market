@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { KeyboardArrowLeft as Arrow } from '@mui/icons-material';
 import React from 'react';
 
-function index() {
+function Back() {
   return (
     <Box sx={{
       a: {
@@ -24,4 +24,4 @@ function index() {
   );
 }
 
-export default index;
+export default Back;

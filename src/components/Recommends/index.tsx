@@ -23,7 +23,7 @@ function Recommends({ id }: IProps) {
   const skeleton = new Array(3).fill(0);
 
   const filteredItems = id
-    ? items.filter(item => item.id !== Number(id))
+    ? items.filter((item) => item.id !== Number(id))
     : items;
 
   return (
@@ -56,7 +56,7 @@ function Recommends({ id }: IProps) {
               autoplay
               autoplayInterval={5000}
             >
-              {filteredItems.map(product => (
+              {filteredItems.map((product) => (
                 <Box key={product.id}>
                   <Product product={product} />
                 </Box>

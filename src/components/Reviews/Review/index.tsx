@@ -1,4 +1,4 @@
-import { Review } from '#/src/types';
+import { Review as IReview } from '#/src/types';
 import {
   Box,
   Avatar,
@@ -7,7 +7,7 @@ import {
 import styles from './styles';
 
 interface IProps {
-  review: Review
+  review: IReview
 }
 
 function Review({ review }: IProps) {
