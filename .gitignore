@@ -1,0 +1,16 @@
+node_modules
+build
+.yarn-error.log
+.idea
+.vscode
+
+client/env/dev.json
+client/env/prod.json
+client/webpack/report.html
+
+# next.js
+/.next/
+/out/
+
+# production
+/build

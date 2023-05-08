@@ -1,0 +1,52 @@
+{
+    "items": [
+      {
+        "id": 1,
+        "images": [
+            "url",
+            "url"
+        ],
+        "title": "NAME 1",
+        "price": "35$",
+        "oldPrice": "55$",
+        "description": "Описание товара",
+        "createAt": "2023-04-22T18:40:06.973Z"
+      },
+      {
+        "id": 2,
+        "images": [
+            "url",
+            "url"
+        ],
+        "title": "NAME 2",
+        "price": "25$",
+        "oldPrice": "55$",
+        "description": "Описание товара",
+        "createAt": "2023-04-22T18:40:06.973Z"
+      },
+      {
+        "id": 3,
+        "images": [
+            "url",
+            "url"
+        ],
+        "title": "NAME 3",
+        "price": "35$",
+        "oldPrice": "55$",
+        "description": "Описание товара",
+        "createAt": "2023-04-22T18:40:06.973Z"
+      },
+      {
+        "id": 4,
+        "images": [
+            "url",
+            "url"
+        ],
+        "title": "NAME 4",
+        "price": "25$",
+        "oldPrice": "55$",
+        "description": "Описание товара",
+        "createAt": "2023-04-22T18:40:06.973Z"
+      }
+    ]
+}

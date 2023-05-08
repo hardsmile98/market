@@ -1,0 +1,15 @@
+{
+    "item": {
+        "id": 1,
+        "images": [
+            "https://placehold.co/600x400/EEE/31343C",
+            "https://placehold.co/600x400/EEE/31343C",
+            "https://placehold.co/600x400/EEE/31343C"
+        ],
+        "title": "NAME 1",
+        "price": "35$",
+        "oldPrice": "55$",
+        "description": "Описание товара",
+        "createAt": "2023-04-22T18:40:06.973Z"
+    }
+}
