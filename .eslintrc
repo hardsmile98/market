@@ -1,7 +1,6 @@
 {
     "extends": [
       "next/core-web-vitals",
-      "@cartech/eslint-config",
       "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
