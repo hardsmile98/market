@@ -56,7 +56,7 @@ function Info({ info }: IProps) {
 
       <Box mb={2}>
         <Button sx={styles.button}>
-         КУПИТЬ
+          КУПИТЬ
         </Button>
       </Box>
 
