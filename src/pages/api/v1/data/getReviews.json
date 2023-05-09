@@ -2,17 +2,27 @@
   "items": [
     {
       "id": 1,
-      "image": "url",
-      "description": "ТОПОВЫЙ СЕРВИС АВТОПРОДАЖ УВАЖАЮ",
-      "type": "NAME",
-      "createdAt": "2023-04-22T18:40:06.973Z"
+      "name": "Maxim",
+      "image": null,
+      "type": "Товар 1",
+      "description": "Очень крутой магазин!",
+      "createdAt": "2023-05-09T08:24:10.464Z"
     },
     {
       "id": 2,
-      "image": "url",
-      "description": "ТОПОВЫЙ СЕРВИС АВТОПРОДАЖ УВАЖАЮ",
-      "type": "NAME",
-      "createdAt": "2023-04-22T18:40:06.973Z"
+      "name": "Kirill",
+      "image": null,
+      "type": "Товар 2",
+      "description": "Все супер!",
+      "createdAt": "2023-05-09T08:25:00.024Z"
+    },
+    {
+      "id": 3,
+      "name": "12321",
+      "image": null,
+      "type": "123213",
+      "description": "213213",
+      "createdAt": "2023-05-09T09:18:02.011Z"
     }
   ]
 }
