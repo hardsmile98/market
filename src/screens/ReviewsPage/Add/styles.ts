@@ -19,6 +19,12 @@ const styles = {
     color: 'text.secondary',
     mb: 2,
   },
+
+  error: {
+    mt: 1,
+    textAlign: 'center',
+    color: 'error.main',
+  },
 };
 
 export default styles;

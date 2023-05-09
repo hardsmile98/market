@@ -11,6 +11,8 @@ const styles = {
   },
 
   wrap: {
+    textAlign: ['center', 'left'],
+    width: ['100%', '50%'],
     display: 'flex',
     alignItems: 'center',
     flexDirection: ['column', 'row'],

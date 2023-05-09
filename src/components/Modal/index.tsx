@@ -35,6 +35,7 @@ function Modal({
         onClick={onClose}
         fontSize="large"
         sx={{
+          zIndex: 900,
           position: 'absolute',
           right: 12,
           top: 12,

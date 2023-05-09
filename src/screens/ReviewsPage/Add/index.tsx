@@ -1,7 +1,10 @@
+import { useEffect, useState } from 'react';
+import { LoadingButton } from '@mui/lab';
 import {
-  Box, Button, TextField,
+  Box, TextField,
 } from '@mui/material';
 import { Modal } from '#/src/components';
+import { useAddReviewMutation } from '#/src/services/api';
 import styles from './styles';
 
   interface IProps {
@@ -10,6 +13,26 @@ import styles from './styles';
   }
 
 function Add({ open, onClose }: IProps) {
+  const [name, setName] = useState('');
+  const [type, setType] = useState('');
+  const [description, setDescription] = useState('');
+
+  const isDisabled = !name.length || !type.length || !description.length;
+
+  const [addReview, {
+    isLoading,
+    isSuccess,
+    isError,
+  }] = useAddReviewMutation();
+
+  useEffect(() => {
+    if (isSuccess) {
+      onClose();
+    }
+  }, [onClose, isSuccess]);
+
+  const handleAddReview = () => addReview({ name, type, description });
+
   return (
     <Modal
       onClose={onClose}
@@ -25,22 +48,39 @@ function Add({ open, onClose }: IProps) {
             <TextField
               placeholder="Ваше имя"
               sx={styles.input}
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
 
             <TextField
               placeholder="Название товара"
               sx={styles.input}
+              value={type}
+              onChange={(e) => setType(e.target.value)}
             />
 
             <TextField
               placeholder="Отзыв"
               sx={styles.input}
               multiline
+              value={description}
+              onChange={(e) => setDescription(e.target.value)}
             />
 
-            <Button fullWidth>
+            <LoadingButton
+              onClick={handleAddReview}
+              disabled={isDisabled}
+              fullWidth
+              loading={isLoading}
+            >
               ОСТАВИТЬ ОТЗЫВ
-            </Button>
+            </LoadingButton>
+
+            {isError && (
+              <Box sx={styles.error}>
+                Произошла ошибка! Попробуйте снова
+              </Box>
+            )}
           </Box>
         </Box>
       </Box>

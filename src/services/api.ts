@@ -3,7 +3,8 @@ import {
 } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
-import { ProductQuery, Products } from '../types';
+import { AddReviewDto, ProductQuery, Products } from '../types';
+import tagTypes from './tagTypes';
 import {
   transformGetReviews,
 } from './transformResponse';
@@ -31,6 +32,16 @@ export const api = createApi({
         url: 'reviews',
       }),
       transformResponse: transformGetReviews,
+      providesTags: [tagTypes.reviews],
+    }),
+
+    AddReview: builder.mutation<null, AddReviewDto>({
+      query: (dto) => ({
+        url: 'reviews',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.reviews],
     }),
 
     GetProduct: builder.query<ProductQuery, { id: string }>({
@@ -45,6 +56,7 @@ export const api = createApi({
       }),
     }),
   }),
+  tagTypes: Object.values(tagTypes),
 });
 
 export default api;
@@ -53,10 +65,12 @@ export const {
   useGetReviewsQuery,
   useGetProductsQuery,
   useGetProductQuery,
+  useAddReviewMutation,
 } = api;
 
 export const {
   GetProduct,
   GetProducts,
   GetReviews,
+  AddReview,
 } = api.endpoints;

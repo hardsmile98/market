@@ -48,7 +48,7 @@ function Product({ product } : IProps) {
           onClick={(e) => e.preventDefault()}
           sx={styles.button}
         >
-          BUY
+         КУПИТЬ
         </Button>
       </CardActions>
     </Card>
