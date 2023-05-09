@@ -16,7 +16,7 @@ moment.locale('ru');
 
 function App({ Component, pageProps, ...rest }: MyAppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
-  const Layout = Layouts[Component.Layout] ?? ((page) => page);
+  const Layout = Layouts[Component.Layout || 'Main'] ?? ((page) => page);
 
   return (
     <ThemeProvider theme={theme}>
