@@ -1,7 +1,9 @@
+import { LoadingButton } from '@mui/lab';
 import {
-  Box, Button, TextField, Typography,
+  Box, TextField, Typography,
 } from '@mui/material';
 import Image from 'next/image';
+import { useState } from 'react';
 import Modal from '../../Modal';
 import styles from './styles';
 
@@ -12,6 +14,12 @@ interface IProps {
 }
 
 function Register({ open, onClose, openLogin }: IProps) {
+  const [login, setLogin] = useState('');
+  const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+
+  const isDisabled = !login.length || !password.length || password !== confirmPassword;
+
   return (
     <Modal
       onClose={onClose}
@@ -44,23 +52,32 @@ function Register({ open, onClose, openLogin }: IProps) {
             <TextField
               placeholder="Логин"
               sx={styles.input}
+              value={login}
+              onChange={(e) => setLogin(e.target.value)}
             />
 
             <TextField
               placeholder="Пароль"
               type="password"
               sx={styles.input}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
 
             <TextField
               placeholder="Пароль еще раз"
               type="password"
               sx={styles.input}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
 
-            <Button fullWidth>
+            <LoadingButton
+              disabled={isDisabled}
+              fullWidth
+            >
               ЗАРЕГИСТРИРОВАТЬСЯ
-            </Button>
+            </LoadingButton>
           </Box>
         </Box>
 
