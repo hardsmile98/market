@@ -15,6 +15,7 @@ function Banner() {
   return (
     <Box sx={styles.root}>
       <Image
+        priority
         src="/images/banner.png"
         width={1000}
         height={300}
