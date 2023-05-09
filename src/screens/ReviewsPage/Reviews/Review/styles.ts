@@ -35,7 +35,7 @@ const styles = {
     },
   },
 
-  createAt: {
+  createdAt: {
     ml: [0, 4],
   },
 } as Record<string, SxProps>;

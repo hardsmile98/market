@@ -15,7 +15,7 @@ function Review({ review }: IProps) {
     image,
     type,
     description,
-    createAt,
+    createdAt,
   } = review || {};
 
   return (
@@ -40,8 +40,8 @@ function Review({ review }: IProps) {
         {type}
       </Box>
 
-      <Box sx={styles.createAt}>
-        {createAt}
+      <Box sx={styles.createdAt}>
+        {createdAt}
       </Box>
     </Paper>
   );

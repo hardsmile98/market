@@ -3,7 +3,7 @@ interface Review {
     image: string
     description: string
     type: string
-    createAt: string
+    createdAt: string
 }
 
 interface Reviews {
