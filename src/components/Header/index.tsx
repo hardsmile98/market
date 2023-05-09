@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Box } from '@mui/material';
-import { PersonOutlineOutlined as Icon } from '@mui/icons-material';
+import Icon from '@mui/icons-material/PersonOutlineOutlined';
 import Image from 'next/image';
 import Link from 'next/link';
 import styles from './styles';

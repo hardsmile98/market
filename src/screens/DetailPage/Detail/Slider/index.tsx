@@ -1,6 +1,7 @@
 import { Box } from '@mui/material';
 import Carousel from 'nuka-carousel';
-import { ArrowForward as Next, ArrowBack as Back } from '@mui/icons-material';
+import Next from '@mui/icons-material/ArrowForward';
+import Back from '@mui/icons-material/ArrowBack';
 import React from 'react';
 
 interface IProps {

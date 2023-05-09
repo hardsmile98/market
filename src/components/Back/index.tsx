@@ -1,6 +1,6 @@
 import { Box } from '@mui/material';
 import Link from 'next/link';
-import { KeyboardArrowLeft as Arrow } from '@mui/icons-material';
+import Arrow from '@mui/icons-material/KeyboardArrowLeft';
 import React from 'react';
 
 interface IProps {

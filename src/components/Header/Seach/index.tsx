@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { useGetProductsQuery } from '#/src/services/api';
-import { Search as SearchIcon } from '@mui/icons-material';
+import SearchIcon from '@mui/icons-material/Search';
 import {
   Autocomplete, Box, InputAdornment, TextField,
 } from '@mui/material';

@@ -1,6 +1,6 @@
 import { useDeleteReviewMutation } from '#/src/services/api';
 import { Review } from '#/src/types';
-import { Delete } from '@mui/icons-material';
+import Delete from '@mui/icons-material/Delete';
 import {
   IconButton,
   TableCell,
