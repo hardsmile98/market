@@ -26,6 +26,10 @@ function List() {
     );
   }
 
+  if (!items.length) {
+    return <div>Нет добавленных товаров</div>;
+  }
+
   return (
     <Grid container spacing={2}>
       {items.map((product) => (
