@@ -18,7 +18,11 @@ const styles = {
     width: [45, 45, 50],
     height: [45, 45, 50],
     border: 'none',
+    color: 'text.primary',
     backgroundColor: 'secondary.light',
+    ':disabled': {
+      color: 'divider',
+    },
   },
 };
 
