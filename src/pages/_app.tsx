@@ -1,21 +1,22 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import Head from 'next/head';
-import { AppProps } from 'next/app';
 import {
-  ThemeProvider, CssBaseline, Container, Box,
+  ThemeProvider, CssBaseline,
 } from '@mui/material';
 import { Provider } from 'react-redux';
 import moment from 'moment';
-import { Header } from '../components';
 import theme from '../theme';
 import { wrapper } from '../store';
 import 'abort-controller/polyfill';
 import 'moment/locale/ru';
+import { MyAppProps } from '../types/common';
+import { Layouts } from '../components/Layouts';
 
 moment.locale('ru');
 
-function App({ Component, pageProps, ...rest }: AppProps) {
+function App({ Component, pageProps, ...rest }: MyAppProps) {
   const { store } = wrapper.useWrappedStore(pageProps);
+  const Layout = Layouts[Component.Layout] ?? ((page) => page);
 
   return (
     <ThemeProvider theme={theme}>
@@ -28,15 +29,9 @@ function App({ Component, pageProps, ...rest }: AppProps) {
           </title>
         </Head>
 
-        <Container>
-          <Box py={3}>
-            <Header />
-          </Box>
-
-          <Box>
-            <Component {...rest} {...pageProps} />
-          </Box>
-        </Container>
+        <Layout>
+          <Component {...rest} {...pageProps} />
+        </Layout>
       </Provider>
     </ThemeProvider>
   );

@@ -1,5 +1,7 @@
 import {
-  createApi, fetchBaseQuery, retry,
+  buildCreateApi,
+  coreModule,
+  fetchBaseQuery, reactHooksModule,
 } from '@reduxjs/toolkit/query/react';
 import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
@@ -15,16 +17,18 @@ import {
   transformGetReviews,
 } from './transformResponse';
 
+const createApi = buildCreateApi(
+  coreModule(),
+  reactHooksModule({ unstable__sideEffectsInRender: true }),
+);
+
 export const api = createApi({
   reducerPath: 'api',
 
-  baseQuery: retry(
-    fetchBaseQuery({
-      baseUrl: `${API_URL}/v1`,
-      credentials: 'include',
-    }),
-    { maxRetries: 2 },
-  ),
+  baseQuery: fetchBaseQuery({
+    baseUrl: `${API_URL}/v1`,
+    credentials: 'include',
+  }),
 
   // eslint-disable-next-line consistent-return
   extractRehydrationInfo(action, { reducerPath }) {
@@ -49,6 +53,15 @@ export const api = createApi({
       }),
     }),
 
+    DeleteReview: builder.mutation<null, { id: number }>({
+      query: (dto) => ({
+        url: 'reviews',
+        method: 'DELETE',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.reviews],
+    }),
+
     GetReviews: builder.query({
       query: () => ({
         url: 'reviews',
@@ -66,6 +79,15 @@ export const api = createApi({
       invalidatesTags: [tagTypes.reviews],
     }),
 
+    DeleteProduct: builder.mutation<null, { id: number }>({
+      query: (dto) => ({
+        url: 'products',
+        method: 'DELETE',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.products],
+    }),
+
     GetProduct: builder.query<ProductQuery, { id: string }>({
       query: ({ id }) => ({
         url: `products/${id}`,
@@ -76,6 +98,7 @@ export const api = createApi({
       query: () => ({
         url: 'products',
       }),
+      providesTags: [tagTypes.products],
     }),
   }),
   tagTypes: Object.values(tagTypes),
@@ -89,9 +112,11 @@ export const {
 
   useGetReviewsQuery,
   useAddReviewMutation,
+  useDeleteReviewMutation,
 
   useGetProductsQuery,
   useGetProductQuery,
+  useDeleteProductMutation,
 } = api;
 
 export const {

@@ -1,18 +1,18 @@
-import { ProductsPage } from '#/src/screens';
-import { GetProducts } from '../services/api';
-import { wrapper } from '../store';
+import { AdminReviewsPage } from '#/src/screens';
+import { GetReviews } from '#/src/services/api';
+import { wrapper } from '#/src/store';
 
 function Page() {
-  return <ProductsPage />;
+  return <AdminReviewsPage />;
 }
 
 export default Page;
-Page.Layout = 'Main';
+Page.Layout = 'Admin';
 
 export const getServerSideProps = wrapper
   .getServerSideProps(({ dispatch }) => async ({ req }) => {
     await Promise.all([
-      dispatch(GetProducts.initiate(null)),
+      dispatch(GetReviews.initiate({})),
     ]);
 
     return {

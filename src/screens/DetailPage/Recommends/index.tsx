@@ -23,6 +23,10 @@ function Recommends({ id }: IProps) {
     ? items.filter((item) => item.id !== Number(id))
     : items;
 
+  if (!filteredItems.length) {
+    return null;
+  }
+
   return (
     <>
       <Typography variant="h5">

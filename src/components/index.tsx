@@ -4,6 +4,7 @@ import ErrorBoundary from './ErrorBoundary';
 import Header from './Header';
 import Back from './Back';
 import Modal from './Modal';
+import AdminHeader from './AdminHeader';
 
 export {
   Error,
@@ -12,4 +13,5 @@ export {
   Back,
   ErrorBoundary,
   Modal,
+  AdminHeader,
 };

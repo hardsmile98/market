@@ -1,10 +1,9 @@
 import { Box, Typography } from '@mui/material';
-import { Back } from '../components';
 
 function Error404() {
   return (
     <Box
-      pt={5}
+      py={5}
       textAlign="center"
     >
       <Typography
@@ -17,10 +16,9 @@ function Error404() {
       <Box my={1}>
         Такой страницы не существует
       </Box>
-
-      <Back />
     </Box>
   );
 }
 
 export default Error404;
+Error404.Layout = 'Main';
