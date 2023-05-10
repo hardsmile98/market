@@ -1,3 +1,4 @@
+import { useGetSettingsQuery } from '#/src/services/api';
 import { Box } from '@mui/material';
 import Image from 'next/image';
 
@@ -12,11 +13,13 @@ const styles = {
 };
 
 function Banner() {
+  const { data } = useGetSettingsQuery(null);
+
   return (
     <Box sx={styles.root}>
       <Image
         priority
-        src="/images/banner.png"
+        src={data?.bannerImg || '/images/banner.png'}
         width={1000}
         height={300}
         alt="banner"
