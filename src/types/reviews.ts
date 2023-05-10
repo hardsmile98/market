@@ -15,6 +15,7 @@ interface AddReviewDto {
   name: string
   type: string
   description: string
+  image?: string
 }
 
 export type {
