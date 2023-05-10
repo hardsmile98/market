@@ -45,7 +45,7 @@ function Add() {
           <TextField
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="Название товара"
+            placeholder="Имя"
             fullWidth
             sx={{ ...styles.input, mr: [0, 1] }}
           />
