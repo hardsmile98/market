@@ -1,5 +1,5 @@
 import { DetailPage } from '#/src/screens';
-import { GetProduct, GetProducts } from '#/src/services/api';
+import { GetProduct, GetProducts, GetSettings } from '#/src/services/api';
 import { wrapper } from '#/src/store';
 
 function Page() {
@@ -16,6 +16,7 @@ export const getServerSideProps = wrapper
     await Promise.all([
       dispatch(GetProducts.initiate(null)),
       dispatch(GetProduct.initiate({ id: String(id) })),
+      dispatch(GetSettings.initiate(null)),
     ]);
 
     return {

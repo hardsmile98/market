@@ -1,3 +1,4 @@
+import { useGetSettingsQuery } from '#/src/services/api';
 import { Product as IPropduct } from '#/src/types';
 import {
   Box,
@@ -18,6 +19,8 @@ function Product({ product } : IProps) {
   const {
     id, images, title, price,
   } = product || {};
+
+  const { data } = useGetSettingsQuery(null);
 
   return (
     <Card
@@ -48,7 +51,7 @@ function Product({ product } : IProps) {
           onClick={(e) => e.preventDefault()}
           sx={styles.button}
         >
-          КУПИТЬ
+          {data?.buttonText || 'Купить'}
         </Button>
       </CardActions>
     </Card>

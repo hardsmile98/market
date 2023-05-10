@@ -1,24 +1,26 @@
+/* eslint-disable no-use-before-define */
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
 import { ruRU } from '@mui/material/locale';
+import { Settings } from '../types';
 
-export const gradient = 'linear-gradient(94.13deg, #300216 -7.33%, #FF7251 125.29%)';
-export const buttonColor = '#FFA1A1';
-export const white = '#fff';
+const defaultGradient1 = '#300216';
+const defaultGradient2 = '#FF7251';
 
-const customTheme = createTheme({
+export const customTheme = (settings: Settings | undefined) => createTheme({
   palette: {
     text: {
-      primary: '#000',
-      secondary: '#575757',
+      primary: settings?.textPrimary || '#000',
+      secondary: settings?.textSecondary || '#575757',
     },
     secondary: {
-      main: '#300216',
-      dark: '#541E35',
-      light: '#FF6A55',
+      main: settings?.secondaryMain || '#300216',
+      dark: settings?.secondaryDark || '#541E35',
+      light: settings?.secondaryLight || '#FF6A55',
     },
 
     background: {
-      default: '##F7F1EE',
+      default: settings?.backgroundDefault || '##F7F1EE',
+      paper: settings?.backgroundPaper || '#fff',
     },
   },
 
@@ -39,12 +41,12 @@ const customTheme = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
-          color: buttonColor,
-          background: gradient,
+          background: `linear-gradient(94.13deg, ${settings?.gradient1 || defaultGradient1} -7.33%, ${settings?.gradient2 || defaultGradient2} 125.29%)`,
           borderRadius: 32,
           padding: '16px 32px',
+          color: settings?.backgroundPaper || '#fff',
           ':hover': {
-            color: white,
+            color: settings?.backgroundPaper || '#fff',
           },
         },
       },
@@ -52,4 +54,6 @@ const customTheme = createTheme({
   },
 }, ruRU);
 
-export default responsiveFontSizes(customTheme);
+const createMyTheme = (settings: Settings) => responsiveFontSizes(customTheme(settings));
+
+export default createMyTheme;

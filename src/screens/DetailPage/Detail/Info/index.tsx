@@ -2,6 +2,7 @@ import { Product } from '#/src/types';
 import {
   Box, Button, TextField, Typography,
 } from '@mui/material';
+import { useState } from 'react';
 import styles from './styles';
 
 interface IProps {
@@ -9,6 +10,8 @@ interface IProps {
 }
 
 function Info({ info }: IProps) {
+  const [count, setCount] = useState(1);
+
   const {
     title,
     price,
@@ -50,6 +53,8 @@ function Info({ info }: IProps) {
 
         <TextField
           type="number"
+          value={count}
+          onChange={(e) => setCount(Number(e.target.value))}
           sx={styles.input}
         />
       </Box>

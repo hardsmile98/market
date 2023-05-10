@@ -12,6 +12,7 @@ import {
   ProductDto,
   ProductQuery,
   Products,
+  Settings,
 } from '../types';
 import tagTypes from './tagTypes';
 import {
@@ -110,6 +111,13 @@ export const api = createApi({
       }),
       providesTags: [tagTypes.products],
     }),
+
+    GetSettings: builder.query<Settings, null>({
+      query: () => ({
+        url: 'settings',
+      }),
+      providesTags: [tagTypes.settings],
+    }),
   }),
   tagTypes: Object.values(tagTypes),
 });
@@ -128,11 +136,13 @@ export const {
   useGetProductQuery,
   useDeleteProductMutation,
   useAddProductMutation,
+
+  useGetSettingsQuery,
 } = api;
 
 export const {
   GetProduct,
   GetProducts,
   GetReviews,
-  AddReview,
+  GetSettings,
 } = api.endpoints;

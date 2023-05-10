@@ -1,4 +1,3 @@
-import { gradient } from '#/src/theme';
 import { SxProps } from '@mui/material';
 
 const styles = {
@@ -24,7 +23,7 @@ const styles = {
 
   login: {
     color: 'background.paper',
-    background: gradient,
+    textTransform: 'none',
     px: 3,
     borderRadius: 7,
     py: 1.5,

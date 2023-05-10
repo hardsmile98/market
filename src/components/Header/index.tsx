@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Box } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import Icon from '@mui/icons-material/PersonOutlineOutlined';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -53,13 +53,13 @@ function Header() {
                 </Box>
               </li>
               <li>
-                <Box
+                <Button
                   onClick={() => setOpenModal('login')}
                   sx={styles.login}
                 >
                   <Icon />
                   Вход
-                </Box>
+                </Button>
               </li>
             </ul>
           </Box>
