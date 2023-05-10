@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useGetSettingsQuery, useUdpateSettingsMutation } from '#/src/services/api';
+import { Settings } from '#/src/types';
+import { LoadingButton } from '@mui/lab';
 import {
   Box,
   Divider,
@@ -5,21 +9,25 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
+import styles from './styles';
 
 function AdminSettingsPage() {
-  const [bannerImg, setBannerImg] = useState('');
+  const [settings, setSettings] = useState<Settings | any>();
 
-  const [bgColor, setBgColor] = useState('');
-  const [textPrimaryColor, setTextPrimaryColor] = useState('');
-  const [textSecondaryColor, setTextSecondaryColor] = useState('');
+  const { data } = useGetSettingsQuery(null);
 
-  const [buttonText, setButtonText] = useState('');
-  const [productTextColor, setProductTextColor] = useState('');
-  const [productSubstrateColor, setProductSubstrateColor] = useState('');
-  const [productPriceColor, setProductPriceColor] = useState('');
-  const [gradientColor1, setGradientColor1] = useState('');
-  const [gradientColor2, setGradientColor2] = useState('');
+  useEffect(() => {
+    if (data) {
+      setSettings(data);
+    }
+  }, [data]);
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSettings({ ...settings, [e.target.name]: e.target.value });
+  };
+
+  const [update, { isLoading, isSuccess, isError }] = useUdpateSettingsMutation();
 
   return (
     <>
@@ -34,9 +42,23 @@ function AdminSettingsPage() {
           </Typography>
 
           <TextField
-            value={bannerImg}
-            onChange={(e) => setBannerImg(e.target.value)}
             placeholder="Введите ссылку баннер"
+            value={settings?.bannerImg}
+            onChange={handleChange}
+            name="bannerImg"
+            fullWidth
+            sx={{ mb: 1 }}
+          />
+
+          <Typography variant="h6" mb={1}>
+            Текст на кнопке
+          </Typography>
+
+          <TextField
+            placeholder="Введите текст на кнопке"
+            onChange={handleChange}
+            value={settings?.buttonText}
+            name="buttonText"
             fullWidth
           />
         </Box>
@@ -48,16 +70,132 @@ function AdminSettingsPage() {
             Цвета
           </Typography>
 
-          <Box display="flex">
-            <Box width="50%">
-              <Box>Основные цвета</Box>
+          <Box sx={styles.colors}>
+            <Box display="flex">
+              <Box mr={1}>
+                Основной цвет текста:
+              </Box>
+
+              <input
+                type="color"
+                name="textPrimary"
+                onChange={handleChange}
+                value={settings?.textPrimary}
+              />
             </Box>
 
-            <Box width="50%">
-              <Box>Настройки карточки</Box>
+            <Box display="flex">
+              <Box mr={1}>
+                Вторичный цвет текста:
+              </Box>
+
+              <input
+                type="color"
+                name="textSecondary"
+                onChange={handleChange}
+                value={settings?.textSecondary}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Основной цвет фона:
+              </Box>
+
+              <input
+                type="color"
+                name="backgroundDefault"
+                onChange={handleChange}
+                value={settings?.backgroundDefault}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Вторичный цвет фона:
+              </Box>
+
+              <input
+                type="color"
+                name="backgroundPaper"
+                onChange={handleChange}
+                value={settings?.backgroundPaper}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Цвет цены:
+              </Box>
+
+              <input
+                type="color"
+                name="secondaryDark"
+                onChange={handleChange}
+                value={settings?.secondaryDark}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Цвет переключателей:
+              </Box>
+
+              <input
+                type="color"
+                name="secondaryLight"
+                onChange={handleChange}
+                value={settings?.secondaryLight}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Цвет градиента 1:
+              </Box>
+
+              <input
+                type="color"
+                name="gradient1"
+                onChange={handleChange}
+                value={settings?.gradient1}
+              />
+            </Box>
+
+            <Box display="flex">
+              <Box mr={1}>
+                Цвет градиента 2:
+              </Box>
+
+              <input
+                type="color"
+                name="gradient2"
+                onChange={handleChange}
+                value={settings?.gradient2}
+              />
             </Box>
           </Box>
         </Box>
+
+        <LoadingButton
+          fullWidth
+          loading={isLoading}
+          onClick={() => update(settings)}
+        >
+          Сохранить
+        </LoadingButton>
+
+        {isSuccess && (
+          <Box sx={styles.success}>
+            Измнения успешно сохранены!
+          </Box>
+        )}
+
+        {isError && (
+          <Box sx={styles.error}>
+            Произошла ошибка. Попробуйте позже!
+          </Box>
+        )}
       </Paper>
     </>
   );

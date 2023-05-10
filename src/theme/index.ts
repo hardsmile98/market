@@ -19,7 +19,7 @@ export const customTheme = (settings: Settings | undefined) => createTheme({
     },
 
     background: {
-      default: settings?.backgroundDefault || '##F7F1EE',
+      default: settings?.backgroundDefault || '#F7F1EE',
       paper: settings?.backgroundPaper || '#fff',
     },
   },
@@ -30,7 +30,7 @@ export const customTheme = (settings: Settings | undefined) => createTheme({
         body: {
           fontSize: '16px',
           overflowX: 'hidden',
-          backgroundColor: '#F7F1EE',
+          backgroundColor: settings?.backgroundDefault || '#F7F1EE',
         },
         '*': {
           boxSizing: 'border-box',

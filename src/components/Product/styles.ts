@@ -30,7 +30,7 @@ const styles = {
 
   image: {
     height: 220,
-    backgroundColor: 'secondary.main',
+    backgroundColor: 'background.paper',
   },
 
   actions: {

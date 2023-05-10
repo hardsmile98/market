@@ -118,6 +118,15 @@ export const api = createApi({
       }),
       providesTags: [tagTypes.settings],
     }),
+
+    UdpateSettings: builder.mutation<null, Settings>({
+      query: (dto) => ({
+        url: 'settings',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.settings],
+    }),
   }),
   tagTypes: Object.values(tagTypes),
 });
@@ -138,6 +147,7 @@ export const {
   useAddProductMutation,
 
   useGetSettingsQuery,
+  useUdpateSettingsMutation,
 } = api;
 
 export const {

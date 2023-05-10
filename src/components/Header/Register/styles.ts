@@ -9,7 +9,7 @@ const styles = {
 
   input: {
     mb: 1.5,
-    backgroundColor: '#E2D4CD',
+    backgroundColor: 'background.paper',
     borderRadius: 2,
     width: '100%',
     px: 1.5,

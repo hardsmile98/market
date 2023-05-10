@@ -1,3 +1,4 @@
+import { useGetSettingsQuery } from '#/src/services/api';
 import { Product } from '#/src/types';
 import {
   Box, Button, TextField, Typography,
@@ -10,6 +11,8 @@ interface IProps {
 }
 
 function Info({ info }: IProps) {
+  const { data } = useGetSettingsQuery(null);
+
   const [count, setCount] = useState(1);
 
   const {
@@ -61,7 +64,7 @@ function Info({ info }: IProps) {
 
       <Box mb={2}>
         <Button sx={styles.button}>
-          КУПИТЬ
+          {data?.buttonText || 'Купить'}
         </Button>
       </Box>
 
