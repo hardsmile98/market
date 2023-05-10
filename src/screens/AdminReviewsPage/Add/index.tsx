@@ -17,6 +17,8 @@ function Add() {
   const [image, setImage] = useState('');
   const [description, setDescription] = useState('');
 
+  const isDisabled = !name.length || !type.length || !description.length;
+
   const [addReview, {
     isLoading,
     isSuccess,
@@ -77,6 +79,7 @@ function Add() {
         <LoadingButton
           fullWidth
           loading={isLoading}
+          disabled={isDisabled}
           onClick={() => addReview({
             name,
             type,

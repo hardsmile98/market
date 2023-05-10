@@ -9,6 +9,7 @@ import {
   AddReviewDto,
   AuthDto,
   AuthResponse,
+  ProductDto,
   ProductQuery,
   Products,
 } from '../types';
@@ -79,6 +80,15 @@ export const api = createApi({
       invalidatesTags: [tagTypes.reviews],
     }),
 
+    AddProduct: builder.mutation<null, ProductDto>({
+      query: (dto) => ({
+        url: 'products',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.products],
+    }),
+
     DeleteProduct: builder.mutation<null, { id: number }>({
       query: (dto) => ({
         url: 'products',
@@ -117,6 +127,7 @@ export const {
   useGetProductsQuery,
   useGetProductQuery,
   useDeleteProductMutation,
+  useAddProductMutation,
 } = api;
 
 export const {

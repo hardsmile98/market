@@ -8,6 +8,14 @@ interface Product {
     createAt: string
 }
 
+interface ProductDto {
+  images: Array<string>
+  description: string
+  title: string
+  price: string
+  oldPrice?: string
+}
+
 interface Products {
     items: Array<Product>
 }
@@ -17,6 +25,7 @@ interface ProductQuery {
 }
 
 export type {
+  ProductDto,
   ProductQuery,
   Products,
   Product,
