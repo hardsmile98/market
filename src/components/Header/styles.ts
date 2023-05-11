@@ -21,20 +21,6 @@ const styles = {
     width: ['100%', '100%', 'auto'],
   },
 
-  login: {
-    color: 'background.paper',
-    textTransform: 'none',
-    px: 3,
-    borderRadius: 7,
-    py: 1.5,
-    display: 'flex',
-    alignItems: 'center',
-
-    svg: {
-      mr: 0.5,
-    },
-  },
-
   search: {
     width: ['100%', 320, 220, 320],
     order: [1, 0],

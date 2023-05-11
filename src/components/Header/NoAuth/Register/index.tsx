@@ -1,41 +1,44 @@
+import { useEffect, useState } from 'react';
+import { LoadingButton } from '@mui/lab';
 import {
   Box, TextField, Typography,
 } from '@mui/material';
-import { LoadingButton } from '@mui/lab';
-import { useDispatch } from 'react-redux';
-import { login as onLogin } from '#/src/store/slices/auth';
-import { useLoginMutation } from '#/src/services/api';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
-import Modal from '../../Modal';
+import {
+  useRegisterMutation,
+} from '#/src/services/api';
+import { login as onLogin } from '#/src/store/slices/auth';
+import { useDispatch } from 'react-redux';
+import Modal from '../../../Modal';
 import styles from './styles';
 
 interface IProps {
     onClose: () => void
-    openRegister: () => void
+    openLogin: () => void
     open: boolean
 }
 
-function Login({ open, onClose, openRegister }: IProps) {
+function Register({ open, onClose, openLogin }: IProps) {
   const dispatch = useDispatch();
 
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
 
-  const isDisabled = !login.length || !password.length;
+  const isDisabled = !login.length || !password.length || password !== confirmPassword;
 
-  const [auth, {
+  const [register, {
     isLoading,
-    isError,
     isSuccess,
+    isError,
     data,
-  }] = useLoginMutation();
+  }] = useRegisterMutation();
 
   useEffect(() => {
     if (isSuccess && data) {
       dispatch(onLogin(data));
     }
-  }, [dispatch, isSuccess, data]);
+  }, [dispatch, data, isSuccess]);
 
   return (
     <Modal
@@ -56,7 +59,7 @@ function Login({ open, onClose, openRegister }: IProps) {
             variant="h6"
             mt={2}
           >
-            Вход на сайт
+            Регистрация на сайте
           </Typography>
         </Box>
 
@@ -81,13 +84,21 @@ function Login({ open, onClose, openRegister }: IProps) {
               onChange={(e) => setPassword(e.target.value)}
             />
 
+            <TextField
+              placeholder="Пароль еще раз"
+              type="password"
+              sx={styles.input}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+
             <LoadingButton
               disabled={isDisabled}
               loading={isLoading}
-              onClick={() => auth({ login, password })}
+              onClick={() => register({ login, password })}
               fullWidth
             >
-              АВТОРИЗОВАТЬСЯ
+              ЗАРЕГИСТРИРОВАТЬСЯ
             </LoadingButton>
           </Box>
 
@@ -100,16 +111,16 @@ function Login({ open, onClose, openRegister }: IProps) {
 
         <Box sx={styles.helpText}>
           <Box>
-            Вы новый пользователь?
+            У вас уже есть аккаунт?
           </Box>
           <Box>
             {'Тогда '}
             <Box
               sx={styles.register}
               component="span"
-              onClick={openRegister}
+              onClick={openLogin}
             >
-              зарегистрируйтесь
+              авторизуйтесь
             </Box>
             , чтобы войти на сайт
           </Box>
@@ -119,4 +130,4 @@ function Login({ open, onClose, openRegister }: IProps) {
   );
 }
 
-export default Login;
+export default Register;

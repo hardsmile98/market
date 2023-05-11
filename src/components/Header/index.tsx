@@ -1,87 +1,61 @@
-import { useState } from 'react';
 import { Box, Button } from '@mui/material';
-import Icon from '@mui/icons-material/PersonOutlineOutlined';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '#/src/store';
+import { logout } from '#/src/store/slices/auth';
 import styles from './styles';
 import Search from './Seach';
-import Login from './Login';
-import Register from './Register';
-
-type Modal = 'register' | 'login';
+import NoAuth from './NoAuth';
 
 function Header() {
-  const [openModal, setOpenModal] = useState<null | Modal>(null);
+  const dispatch = useDispatch();
 
-  const handleClose = () => setOpenModal(null);
+  const { isAuth } = useSelector((state: RootState) => state.auth);
+
+  const handleLogout = () => dispatch(logout());
 
   return (
-    <>
-      <Box
-        component="header"
-        sx={styles.root}
-      >
-        <Box sx={styles.logo}>
-          <Link href="/">
-            <Image
-              priority
-              src="/images/logo.svg"
-              width="200"
-              height="60"
-              alt="shop"
-            />
-          </Link>
-        </Box>
-
-        <Box sx={styles.left}>
-          <Box sx={styles.search}>
-            <Search />
-          </Box>
-
-          <Box sx={styles.menu}>
-            <ul>
-              <li>
-                <Link href="/reviews">
-                  Отзывы
-                </Link>
-              </li>
-              <li>
-                <Box
-                  onClick={() => setOpenModal('register')}
-                >
-                  Регистрация
-                </Box>
-              </li>
-              <li>
-                <Button
-                  onClick={() => setOpenModal('login')}
-                  sx={styles.login}
-                >
-                  <Icon />
-                  Вход
-                </Button>
-              </li>
-            </ul>
-          </Box>
-        </Box>
+    <Box
+      component="header"
+      sx={styles.root}
+    >
+      <Box sx={styles.logo}>
+        <Link href="/">
+          <Image
+            priority
+            src="/images/logo.svg"
+            width="200"
+            height="60"
+            alt="shop"
+          />
+        </Link>
       </Box>
 
-      {openModal === 'login' && (
-        <Login
-          onClose={handleClose}
-          open={openModal === 'login'}
-          openRegister={() => setOpenModal('register')}
-        />
-      )}
+      <Box sx={styles.left}>
+        <Box sx={styles.search}>
+          <Search />
+        </Box>
 
-      {openModal === 'register' && (
-        <Register
-          onClose={handleClose}
-          open={openModal === 'register'}
-          openLogin={() => setOpenModal('login')}
-        />
-      )}
-    </>
+        <Box sx={styles.menu}>
+          <ul>
+            <li>
+              <Link href="/reviews">
+                Отзывы
+              </Link>
+            </li>
+
+            {isAuth ? (
+              <li>
+                <Button onClick={handleLogout}>
+                  Выход
+                </Button>
+              </li>
+            ) : <NoAuth />}
+          </ul>
+        </Box>
+      </Box>
+    </Box>
   );
 }
 
