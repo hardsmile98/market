@@ -2,10 +2,12 @@ import { configureStore } from '@reduxjs/toolkit';
 import { createWrapper } from 'next-redux-wrapper';
 import { api } from '../services/api';
 import rtkQueryErrorHandler from '../services/rtkQueryErrorHandler';
+import authReducer from './slice/auth';
 
 export const makeStore = () => configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
+    auth: authReducer,
   },
 
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()

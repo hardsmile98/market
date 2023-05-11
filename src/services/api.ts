@@ -3,6 +3,7 @@ import {
   coreModule,
   fetchBaseQuery, reactHooksModule,
 } from '@reduxjs/toolkit/query/react';
+import { getCookie } from 'cookies-next';
 import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
 import {
@@ -29,6 +30,15 @@ export const api = createApi({
 
   baseQuery: fetchBaseQuery({
     baseUrl: `${API_URL}/v1`,
+    prepareHeaders(headers) {
+      const token = getCookie('AUTH_TOKEN');
+
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`);
+      }
+
+      return headers;
+    },
     credentials: 'include',
   }),
 

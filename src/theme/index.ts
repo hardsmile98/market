@@ -9,7 +9,7 @@ const defaultGradient2 = '#FF7251';
 export const customTheme = (settings: Settings | undefined) => createTheme({
   palette: {
     text: {
-      primary: settings?.textPrimary || '#000',
+      primary: settings?.textPrimary || '#000000',
       secondary: settings?.textSecondary || '#575757',
     },
     secondary: {
@@ -20,7 +20,7 @@ export const customTheme = (settings: Settings | undefined) => createTheme({
 
     background: {
       default: settings?.backgroundDefault || '#F7F1EE',
-      paper: settings?.backgroundPaper || '#fff',
+      paper: settings?.backgroundPaper || '#FFFFFF',
     },
   },
 

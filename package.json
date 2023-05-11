@@ -14,7 +14,7 @@
     "start": "next start",
     "lint": "next lint",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "next dev -p 3000"
+    "dev": "next dev -p 8080"
   },
   "browserslist": [
     "defaults"
@@ -48,10 +48,10 @@
     "abort-controller": "^3.0.0",
     "axios": "^1.2.1",
     "camelize-ts": "^2.2.0",
+    "cookies-next": "^2.1.1",
     "core-js": "^3.26.1",
     "eslint-config-next": "^13.0.6",
     "moment": "^2.29.4",
-    "mui-color-input": "^1.0.5",
     "next": "13.2.4",
     "next-redux-wrapper": "^8.1.0",
     "nuka-carousel": "^6.0.2",

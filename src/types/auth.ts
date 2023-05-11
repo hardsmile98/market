@@ -5,6 +5,7 @@ interface AuthDto {
 
 interface AuthResponse {
     token: string
+    role: 'ADMIN' | 'USER'
 }
 
 export type {

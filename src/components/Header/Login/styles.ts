@@ -35,6 +35,12 @@ const styles = {
     textDecoration: 'underline',
     cursor: 'pointer',
   },
+
+  error: {
+    textAlign: 'center',
+    mt: 1,
+    color: 'error.main',
+  },
 };
 
 export default styles;

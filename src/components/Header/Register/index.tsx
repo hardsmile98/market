@@ -1,9 +1,14 @@
+import { useEffect, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import {
   Box, TextField, Typography,
 } from '@mui/material';
 import Image from 'next/image';
-import { useState } from 'react';
+import {
+  useRegisterMutation,
+} from '#/src/services/api';
+import { login as onLogin } from '#/src/store/slice/auth';
+import { useDispatch } from 'react-redux';
 import Modal from '../../Modal';
 import styles from './styles';
 
@@ -14,11 +19,26 @@ interface IProps {
 }
 
 function Register({ open, onClose, openLogin }: IProps) {
+  const dispatch = useDispatch();
+
   const [login, setLogin] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
 
   const isDisabled = !login.length || !password.length || password !== confirmPassword;
+
+  const [register, {
+    isLoading,
+    isSuccess,
+    isError,
+    data,
+  }] = useRegisterMutation();
+
+  useEffect(() => {
+    if (isSuccess && data) {
+      dispatch(onLogin(data));
+    }
+  }, [dispatch, data, isSuccess]);
 
   return (
     <Modal
@@ -74,11 +94,19 @@ function Register({ open, onClose, openLogin }: IProps) {
 
             <LoadingButton
               disabled={isDisabled}
+              loading={isLoading}
+              onClick={() => register({ login, password })}
               fullWidth
             >
               ЗАРЕГИСТРИРОВАТЬСЯ
             </LoadingButton>
           </Box>
+
+          {isError && (
+            <Box sx={styles.error}>
+              Произошла ошибка. Попробуйте позже!
+            </Box>
+          )}
         </Box>
 
         <Box sx={styles.helpText}>

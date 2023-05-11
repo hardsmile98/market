@@ -1,0 +1,14 @@
+{
+    "id": 1,
+    "bannerImg": "",
+    "buttonText": "Купить",
+    "textPrimary": "#000000",
+    "textSecondary": "#575757",
+    "secondaryMain": "#300216",
+    "secondaryDark": "#541E35",
+    "secondaryLight": "#FF6A55",
+    "backgroundDefault": "#F7F1EE",
+    "backgroundPaper": "#ffffff",
+    "gradient1": "#300216",
+    "gradient2": "#ff7251"
+}
