@@ -11,7 +11,9 @@ import NoAuth from './NoAuth';
 function Header() {
   const dispatch = useDispatch();
 
-  const { isAuth } = useSelector((state: RootState) => state.auth);
+  const { isAuth, role } = useSelector((state: RootState) => state.auth);
+
+  const isAdmin = isAuth && role === 'ADMIN';
 
   const handleLogout = () => dispatch(logout());
 
@@ -44,6 +46,14 @@ function Header() {
                 Отзывы
               </Link>
             </li>
+
+            {isAdmin && (
+              <li>
+                <Link href="/admin/products">
+                  В админку
+                </Link>
+              </li>
+            )}
 
             {isAuth ? (
               <li>

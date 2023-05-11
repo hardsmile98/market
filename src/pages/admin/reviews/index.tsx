@@ -1,5 +1,5 @@
 import { AdminReviewsPage } from '#/src/screens';
-import { GetReviews, GetSettings } from '#/src/services/api';
+import { CheckMe, GetReviews, GetSettings } from '#/src/services/api';
 import { wrapper } from '#/src/store';
 
 function Page() {
@@ -11,6 +11,16 @@ Page.Layout = 'Admin';
 
 export const getServerSideProps = wrapper
   .getServerSideProps(({ dispatch }) => async ({ req }) => {
+    const { data, isError } = await dispatch(CheckMe.initiate(null));
+
+    const isNotFound = isError || (data && data.role !== 'ADMIN');
+
+    if (isNotFound) {
+      return {
+        notFound: true,
+      };
+    }
+
     await Promise.all([
       dispatch(GetReviews.initiate({})),
       dispatch(GetSettings.initiate(null)),

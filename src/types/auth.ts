@@ -1,5 +1,10 @@
 type Role = 'ADMIN' | 'USER';
 
+interface ChangePasswordDto {
+  currentPassword: string
+  newPassword: string
+}
+
 interface AuthDto {
     login: string
     password: string
@@ -17,6 +22,7 @@ interface CheckResponse {
 export type {
   Role,
   AuthDto,
+  ChangePasswordDto,
   CheckResponse,
   AuthResponse,
 };

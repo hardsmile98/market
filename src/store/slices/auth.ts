@@ -1,5 +1,5 @@
 import { createAction, createSlice } from '@reduxjs/toolkit';
-import { getCookie, setCookie, deleteCookie } from 'cookies-next';
+import { setCookie, deleteCookie } from 'cookies-next';
 import { HYDRATE } from 'next-redux-wrapper';
 import type { RootState } from '#/src/store';
 import { Role } from '#/src/types';
@@ -12,7 +12,7 @@ type AuthState = {
 };
 
 export const initialState = {
-  isAuth: !!getCookie(TOKEN_KEY),
+  isAuth: false,
 } as AuthState;
 
 const hydrate = createAction<RootState>(HYDRATE);
@@ -35,6 +35,7 @@ const authSlice = createSlice({
       const { role } = action.payload;
 
       state.role = role;
+      state.isAuth = true;
     },
 
     logout: (state) => {
@@ -48,7 +49,7 @@ const authSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(hydrate, (state, { payload }) => ({
       ...state,
-      ...payload,
+      ...payload.auth,
     }));
   },
 });

@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { login as onLogin } from '#/src/store/slices/auth';
 import { useLoginMutation } from '#/src/services/api';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import Modal from '../../../Modal';
 import styles from './styles';
 
@@ -37,6 +37,11 @@ function Login({ open, onClose, openRegister }: IProps) {
     }
   }, [dispatch, isSuccess, data]);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    auth({ login, password });
+  };
+
   return (
     <Modal
       onClose={onClose}
@@ -65,7 +70,7 @@ function Login({ open, onClose, openRegister }: IProps) {
             Введите ваши данные:
           </Box>
 
-          <Box component="form">
+          <Box component="form" onSubmit={handleSubmit}>
             <TextField
               placeholder="Логин"
               sx={styles.input}
@@ -84,7 +89,7 @@ function Login({ open, onClose, openRegister }: IProps) {
             <LoadingButton
               disabled={isDisabled}
               loading={isLoading}
-              onClick={() => auth({ login, password })}
+              type="submit"
               fullWidth
             >
               АВТОРИЗОВАТЬСЯ

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { LoadingButton } from '@mui/lab';
 import {
   Box, TextField, Typography,
@@ -40,6 +40,11 @@ function Register({ open, onClose, openLogin }: IProps) {
     }
   }, [dispatch, data, isSuccess]);
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    register({ login, password });
+  };
+
   return (
     <Modal
       onClose={onClose}
@@ -68,7 +73,7 @@ function Register({ open, onClose, openLogin }: IProps) {
             Введите ваши данные:
           </Box>
 
-          <Box component="form">
+          <Box component="form" onSubmit={handleSubmit}>
             <TextField
               placeholder="Логин"
               sx={styles.input}
@@ -95,7 +100,7 @@ function Register({ open, onClose, openLogin }: IProps) {
             <LoadingButton
               disabled={isDisabled}
               loading={isLoading}
-              onClick={() => register({ login, password })}
+              type="submit"
               fullWidth
             >
               ЗАРЕГИСТРИРОВАТЬСЯ

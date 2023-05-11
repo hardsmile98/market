@@ -3,13 +3,13 @@ import {
   coreModule,
   fetchBaseQuery, reactHooksModule,
 } from '@reduxjs/toolkit/query/react';
-import { getCookie } from 'cookies-next';
 import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
 import {
   AddReviewDto,
   AuthDto,
   AuthResponse,
+  ChangePasswordDto,
   CheckResponse,
   ProductDto,
   ProductQuery,
@@ -31,8 +31,9 @@ export const api = createApi({
 
   baseQuery: fetchBaseQuery({
     baseUrl: `${API_URL}/v1`,
-    prepareHeaders(headers) {
-      const token = getCookie('AUTH_TOKEN');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    prepareHeaders(headers, { extra }: any) {
+      const token = extra?.context?.cookies?.AUTH_TOKEN;
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -50,6 +51,14 @@ export const api = createApi({
     }
   },
   endpoints: (builder) => ({
+    ChangePassword: builder.mutation<null, ChangePasswordDto>({
+      query: (dto) => ({
+        url: 'auth/changePassword',
+        method: 'POST',
+        body: dto,
+      }),
+    }),
+
     Login: builder.mutation<AuthResponse, AuthDto>({
       query: (dto) => ({
         url: 'auth/login',
@@ -153,6 +162,7 @@ export default api;
 export const {
   useLoginMutation,
   useRegisterMutation,
+  useChangePasswordMutation,
 
   useGetReviewsQuery,
   useAddReviewMutation,
@@ -172,4 +182,5 @@ export const {
   GetProducts,
   GetReviews,
   GetSettings,
+  CheckMe,
 } = api.endpoints;

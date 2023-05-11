@@ -4,17 +4,21 @@ import { api } from '../services/api';
 import rtkQueryErrorHandler from '../services/rtkQueryErrorHandler';
 import authReducer from './slices/auth';
 
-export const makeStore = () => configureStore({
+export const makeStore = (context: any) => configureStore({
   reducer: {
     [api.reducerPath]: api.reducer,
     auth: authReducer,
   },
-
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware()
-    .concat(
-      api.middleware,
-      rtkQueryErrorHandler,
-    ),
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+    thunk: {
+      extraArgument: {
+        context: context.req || context.ctx?.req,
+      },
+    },
+  }).concat(
+    api.middleware,
+    rtkQueryErrorHandler,
+  ),
 });
 
 export type AppStore = ReturnType<typeof makeStore>;
