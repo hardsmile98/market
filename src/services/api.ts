@@ -10,6 +10,7 @@ import {
   AddReviewDto,
   AuthDto,
   AuthResponse,
+  CheckResponse,
   ProductDto,
   ProductQuery,
   Products,
@@ -62,6 +63,12 @@ export const api = createApi({
         url: 'auth/register',
         method: 'POST',
         body: dto,
+      }),
+    }),
+
+    CheckMe: builder.query<CheckResponse, null>({
+      query: () => ({
+        url: 'auth/check',
       }),
     }),
 

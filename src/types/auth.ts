@@ -1,3 +1,5 @@
+type Role = 'ADMIN' | 'USER';
+
 interface AuthDto {
     login: string
     password: string
@@ -5,10 +7,16 @@ interface AuthDto {
 
 interface AuthResponse {
     token: string
-    role: 'ADMIN' | 'USER'
+    role: Role
+}
+
+interface CheckResponse {
+  role: Role
 }
 
 export type {
+  Role,
   AuthDto,
+  CheckResponse,
   AuthResponse,
 };
