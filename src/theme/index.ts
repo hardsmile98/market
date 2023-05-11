@@ -44,9 +44,9 @@ export const customTheme = (settings: Settings | undefined) => createTheme({
           background: `linear-gradient(94.13deg, ${settings?.gradient1 || defaultGradient1} -7.33%, ${settings?.gradient2 || defaultGradient2} 125.29%)`,
           borderRadius: 32,
           padding: '16px 32px',
-          color: settings?.backgroundPaper || '#fff',
+          color: settings?.backgroundPaper || '#FFFFFF',
           ':hover': {
-            color: settings?.backgroundPaper || '#fff',
+            color: settings?.backgroundPaper || '#FFFFFF',
           },
         },
       },

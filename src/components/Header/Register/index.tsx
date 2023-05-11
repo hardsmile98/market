@@ -7,7 +7,7 @@ import Image from 'next/image';
 import {
   useRegisterMutation,
 } from '#/src/services/api';
-import { login as onLogin } from '#/src/store/slice/auth';
+import { login as onLogin } from '#/src/store/slices/auth';
 import { useDispatch } from 'react-redux';
 import Modal from '../../Modal';
 import styles from './styles';

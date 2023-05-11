@@ -3,7 +3,7 @@ import {
 } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
 import { useDispatch } from 'react-redux';
-import { login as onLogin } from '#/src/store/slice/auth';
+import { login as onLogin } from '#/src/store/slices/auth';
 import { useLoginMutation } from '#/src/services/api';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
