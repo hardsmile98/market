@@ -1,5 +1,8 @@
+type Currency = 'RUB' | 'USD' | 'EUR';
+
 interface Settings {
   id: number
+  currency: Currency
   bannerImg: string
   buttonText: string
   textPrimary: string
@@ -15,4 +18,5 @@ interface Settings {
 
 export type {
   Settings,
+  Currency,
 };

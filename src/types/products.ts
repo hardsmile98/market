@@ -1,3 +1,5 @@
+import { Currency } from './settings';
+
 interface Product {
     id: number
     images: Array<string>
@@ -12,16 +14,18 @@ interface ProductDto {
   images: Array<string>
   description: string
   title: string
-  price: string
-  oldPrice?: string
+  price: number
+  oldPrice?: number
 }
 
 interface Products {
-    items: Array<Product>
+  items: Array<Product>
+  currency: Currency
 }
 
 interface ProductQuery {
   item: Product
+  currency: Currency
 }
 
 export type {

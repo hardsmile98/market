@@ -14,7 +14,7 @@ const styles = {
   },
 
   error: {
-    color: 'success.main',
+    color: 'error.main',
     textAlign: 'center',
     mt: 1,
   },

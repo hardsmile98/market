@@ -15,8 +15,8 @@ import AddImages from './AddImages';
 
 function Add() {
   const [title, setTitle] = useState('');
-  const [price, setPrice] = useState('');
-  const [oldPrice, setOldPrice] = useState('');
+  const [price, setPrice] = useState<number | undefined>(undefined);
+  const [oldPrice, setOldPrice] = useState<undefined | number>(undefined);
   const [images, setImages] = useState<Array<string>>(['']);
   const [description, setDescription] = useState('');
 
@@ -24,7 +24,8 @@ function Add() {
 
   const handleCloseAddingImages = () => setOpenAddingImages(false);
 
-  const isDisabled = !title.length || !price.length || images.length === 0 || !description.length;
+  const isDisabled = !title.length || Number(price) <= 0
+    || images.length === 0 || !description.length;
 
   const [addProduct, {
     isLoading,
@@ -35,8 +36,8 @@ function Add() {
   useEffect(() => {
     if (isSuccess) {
       setTitle('');
-      setPrice('');
-      setOldPrice('');
+      setPrice(undefined);
+      setOldPrice(undefined);
       setImages(['']);
       setDescription('');
     }
@@ -73,16 +74,18 @@ function Add() {
         <Box sx={styles.formRow}>
           <TextField
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
-            placeholder="Цена (30$)"
+            onChange={(e) => setPrice(Number(e.target.value))}
+            placeholder="Цена (например 30)"
+            type="number"
             fullWidth
             sx={styles.input}
           />
 
           <TextField
             value={oldPrice}
-            onChange={(e) => setOldPrice(e.target.value)}
-            placeholder="Старая цена (50$)"
+            onChange={(e) => setOldPrice(Number(e.target.value))}
+            placeholder="Старая цена (например 50)"
+            type="number"
             fullWidth
             sx={{ ...styles.input, ml: [0, 1] }}
           />
@@ -103,7 +106,7 @@ function Add() {
           disabled={isDisabled}
           onClick={() => addProduct({
             title,
-            price,
+            price: Number(price),
             oldPrice: oldPrice || undefined,
             description,
             images: images.filter((image) => !!image),

@@ -3,7 +3,7 @@ import { Product } from '#/src/types';
 import {
   Box, Button, TextField, Typography,
 } from '@mui/material';
-import { useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styles from './styles';
 
 interface IProps {
@@ -12,6 +12,7 @@ interface IProps {
 
 function Info({ info }: IProps) {
   const { data } = useGetSettingsQuery(null);
+  const { buttonText, currency } = data || {};
 
   const [count, setCount] = useState(1);
 
@@ -21,6 +22,15 @@ function Info({ info }: IProps) {
     oldPrice,
     description,
   } = info || {};
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { value } = e.target;
+    const formatteValue = Number(value);
+
+    if (formatteValue >= 0) {
+      setCount(formatteValue);
+    }
+  };
 
   return (
     <Box>
@@ -36,7 +46,7 @@ function Info({ info }: IProps) {
           variant="h3"
           fontWeight="fontWeightBold"
         >
-          {price}
+          {`${price} ${currency}`}
         </Typography>
 
         {oldPrice && (
@@ -44,7 +54,7 @@ function Info({ info }: IProps) {
           variant="h6"
           sx={styles.oldPrice}
         >
-          {oldPrice}
+          {`${oldPrice} ${currency}`}
         </Typography>
         )}
       </Box>
@@ -57,14 +67,17 @@ function Info({ info }: IProps) {
         <TextField
           type="number"
           value={count}
-          onChange={(e) => setCount(Number(e.target.value))}
+          onChange={handleChange}
           sx={styles.input}
         />
       </Box>
 
       <Box mb={2}>
-        <Button sx={styles.button}>
-          {data?.buttonText || 'Купить'}
+        <Button
+          sx={styles.button}
+          disabled={count < 1}
+        >
+          {buttonText || 'Купить'}
         </Button>
       </Box>
 

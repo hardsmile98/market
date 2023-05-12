@@ -3,6 +3,7 @@ import {
   coreModule,
   fetchBaseQuery, reactHooksModule,
 } from '@reduxjs/toolkit/query/react';
+import { getCookie } from 'cookies-next';
 import { HYDRATE } from 'next-redux-wrapper';
 import { API_URL } from '../constants/config';
 import {
@@ -33,7 +34,7 @@ export const api = createApi({
     baseUrl: `${API_URL}/v1`,
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     prepareHeaders(headers, { extra }: any) {
-      const token = extra?.context?.cookies?.AUTH_TOKEN;
+      const token = extra?.context?.cookies?.AUTH_TOKEN || getCookie('AUTH_TOKEN');
 
       if (token) {
         headers.set('Authorization', `Bearer ${token}`);
@@ -116,6 +117,15 @@ export const api = createApi({
       invalidatesTags: [tagTypes.products],
     }),
 
+    UpdateProduct: builder.mutation<null, ProductDto>({
+      query: (dto) => ({
+        url: 'products/update',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.products],
+    }),
+
     DeleteProduct: builder.mutation<null, { id: number }>({
       query: (dto) => ({
         url: 'products',
@@ -172,6 +182,7 @@ export const {
   useGetProductQuery,
   useDeleteProductMutation,
   useAddProductMutation,
+  useUpdateProductMutation,
 
   useGetSettingsQuery,
   useUdpateSettingsMutation,

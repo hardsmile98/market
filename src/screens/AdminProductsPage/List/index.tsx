@@ -8,7 +8,6 @@ import {
   TableRow,
   Paper,
   Typography,
-  Box,
 } from '@mui/material';
 import Row from './Row';
 
@@ -26,7 +25,7 @@ const styles = {
 
 function List() {
   const { data } = useGetProductsQuery(null);
-  const { items = [] } = data || {};
+  const { items = [], currency } = data || {};
 
   return (
     <>
@@ -55,18 +54,13 @@ function List() {
           </TableHead>
 
           <TableBody>
-            {items.length
-              ? items.map((item) => (
-                <Row
-                  key={item.id}
-                  item={item}
-                />
-              ))
-              : (
-                <Box sx={styles.empty}>
-                  Пустой список товаров
-                </Box>
-              )}
+            {items.map((item) => (
+              <Row
+                key={item.id}
+                item={item}
+                currency={currency}
+              />
+            ))}
           </TableBody>
         </Table>
       </TableContainer>

@@ -5,15 +5,24 @@ import { LoadingButton } from '@mui/lab';
 import {
   Box,
   Divider,
+  MenuItem,
   Paper,
+  Select,
+  SelectChangeEvent,
   TextField,
   Typography,
 } from '@mui/material';
 import { ChangeEvent, useEffect, useState } from 'react';
 import styles from './styles';
 
+const optionsCurrency = [
+  { value: 'RUB' },
+  { value: 'USD' },
+  { value: 'EUR' },
+];
+
 function SettingsShop() {
-  const [settings, setSettings] = useState<Settings | any>();
+  const [settings, setSettings] = useState<Settings | any>({ currency: '' });
 
   const { data } = useGetSettingsQuery(null);
 
@@ -24,6 +33,10 @@ function SettingsShop() {
   }, [data]);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setSettings({ ...settings, [e.target.name]: e.target.value });
+  };
+
+  const handleSelectChange = (e: SelectChangeEvent<any>) => {
     setSettings({ ...settings, [e.target.name]: e.target.value });
   };
 
@@ -175,6 +188,31 @@ function SettingsShop() {
               />
             </Box>
           </Box>
+        </Box>
+
+        <Divider sx={{ my: 2 }} />
+
+        <Box>
+          <Typography variant="h6" mb={1}>
+            Валюта
+          </Typography>
+
+          <Select
+            value={settings?.currency}
+            onChange={handleSelectChange}
+            name="currency"
+            sx={{ mb: 1 }}
+            fullWidth
+          >
+            {optionsCurrency.map(({ value }) => (
+              <MenuItem
+                key={value}
+                value={value}
+              >
+                {value}
+              </MenuItem>
+            ))}
+          </Select>
         </Box>
 
         <LoadingButton

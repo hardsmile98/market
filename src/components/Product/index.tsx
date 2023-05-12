@@ -12,15 +12,19 @@ import Link from 'next/link';
 import styles from './styles';
 
 interface IProps {
-    product: IPropduct
+  product: IPropduct
 }
 
 function Product({ product } : IProps) {
   const {
-    id, images, title, price,
+    id,
+    images,
+    title,
+    price,
   } = product || {};
 
   const { data } = useGetSettingsQuery(null);
+  const { currency, buttonText } = data || {};
 
   return (
     <Card
@@ -41,17 +45,17 @@ function Product({ product } : IProps) {
           {title}
         </Box>
         <Box sx={styles.price}>
-          {price}
+          {`${price} ${currency}`}
         </Box>
       </CardContent>
 
       <CardActions sx={styles.actions}>
         <Button
           fullWidth
-          onClick={(e) => e.preventDefault()}
+          LinkComponent={Link}
           sx={styles.button}
         >
-          {data?.buttonText || 'Купить'}
+          {buttonText || 'Купить'}
         </Button>
       </CardActions>
     </Card>
