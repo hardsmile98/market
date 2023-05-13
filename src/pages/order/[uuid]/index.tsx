@@ -14,14 +14,14 @@ export default Page;
 Page.Layout = 'Main';
 
 export const getServerSideProps = wrapper
-  .getServerSideProps(({ dispatch }) => async ({ req, query }) => {
+  .getServerSideProps(({ dispatch }) => async ({ req }) => {
     const { data, isSuccess } = await dispatch(CheckMe.initiate(null));
 
     if (isSuccess && data) {
       dispatch(setRole(data));
     }
 
-    const { id } = query;
+    // const { id } = query;
 
     await Promise.all([
       dispatch(GetProducts.initiate(null)),
