@@ -107,7 +107,9 @@ function Add() {
           onClick={() => addProduct({
             title,
             price: Number(price),
-            oldPrice: oldPrice || undefined,
+            oldPrice: Number(oldPrice) > 0
+              ? oldPrice
+              : undefined,
             description,
             images: images.filter((image) => !!image),
           })}
