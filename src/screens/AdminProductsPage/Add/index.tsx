@@ -36,8 +36,8 @@ function Add() {
   useEffect(() => {
     if (isSuccess) {
       setTitle('');
-      setPrice(undefined);
-      setOldPrice(undefined);
+      setPrice(0);
+      setOldPrice(0);
       setImages(['']);
       setDescription('');
     }
