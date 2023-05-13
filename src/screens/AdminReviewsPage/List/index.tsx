@@ -7,7 +7,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Box,
   Typography,
 } from '@mui/material';
 import Row from './Row';
@@ -56,18 +55,12 @@ function List() {
           </TableHead>
 
           <TableBody>
-            {items.length
-              ? items.map((item) => (
-                <Row
-                  key={item.id}
-                  item={item}
-                />
-              ))
-              : (
-                <Box sx={styles.empty}>
-                  Пустой список товаров
-                </Box>
-              )}
+            {items.map((item) => (
+              <Row
+                key={item.id}
+                item={item}
+              />
+            ))}
           </TableBody>
         </Table>
       </TableContainer>
