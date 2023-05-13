@@ -14,7 +14,7 @@ function Back({ text, href }: IProps) {
       a: {
         color: 'text.secondary',
         textDecoration: 'none',
-        display: 'flex',
+        display: 'inline-flex',
         ':hover': {
           color: 'text.primary',
         },

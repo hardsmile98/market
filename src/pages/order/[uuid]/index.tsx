@@ -1,16 +1,13 @@
-import { DetailPage } from '#/src/screens';
-import {
-  CheckMe,
-  GetPayments,
-  GetProduct,
-  GetProducts,
-  GetSettings,
-} from '#/src/services/api';
+import { OrderPage } from '#/src/screens';
+import { CheckMe, GetProducts, GetSettings } from '#/src/services/api';
 import { wrapper } from '#/src/store';
 import { setRole } from '#/src/store/slices/auth';
+import React from 'react';
 
 function Page() {
-  return <DetailPage />;
+  return (
+    <OrderPage />
+  );
 }
 
 export default Page;
@@ -27,9 +24,7 @@ export const getServerSideProps = wrapper
     const { id } = query;
 
     await Promise.all([
-      dispatch(GetPayments.initiate(null)),
       dispatch(GetProducts.initiate(null)),
-      dispatch(GetProduct.initiate({ id: String(id) })),
       dispatch(GetSettings.initiate(null)),
     ]);
 

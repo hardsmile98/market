@@ -12,6 +12,10 @@ import {
   AuthResponse,
   ChangePasswordDto,
   CheckResponse,
+  CreateOrderDto,
+  CreatePaymentDto,
+  CreatingOrder,
+  Payment,
   ProductDto,
   ProductQuery,
   Products,
@@ -19,7 +23,7 @@ import {
 } from '../types';
 import tagTypes from './tagTypes';
 import {
-  transformGetReviews,
+  transformGetReviews, transformSettings,
 } from './transformResponse';
 
 const createApi = buildCreateApi(
@@ -148,10 +152,11 @@ export const api = createApi({
       providesTags: [tagTypes.products],
     }),
 
-    GetSettings: builder.query<Settings, null>({
+    GetSettings: builder.query({
       query: () => ({
         url: 'settings',
       }),
+      transformResponse: transformSettings,
       providesTags: [tagTypes.settings],
     }),
 
@@ -162,6 +167,40 @@ export const api = createApi({
         body: dto,
       }),
       invalidatesTags: [tagTypes.settings],
+    }),
+
+    GetPayments: builder.query<Array<Payment>, null>({
+      query: () => ({
+        url: 'payments',
+      }),
+      providesTags: [tagTypes.payments],
+    }),
+
+    AddPayment: builder.mutation<null, CreatePaymentDto>({
+      query: (dto) => ({
+        url: 'payments',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.payments],
+    }),
+
+    DeletePayment: builder.mutation<null, { id: number }>({
+      query: (dto) => ({
+        url: 'payments',
+        method: 'DELETE',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.payments],
+    }),
+
+    CreateOrder: builder.mutation<CreatingOrder, CreateOrderDto>({
+      query: (dto) => ({
+        url: 'orders',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.orders],
     }),
   }),
   tagTypes: Object.values(tagTypes),
@@ -186,6 +225,12 @@ export const {
 
   useGetSettingsQuery,
   useUdpateSettingsMutation,
+
+  useGetPaymentsQuery,
+  useAddPaymentMutation,
+  useDeletePaymentMutation,
+
+  useCreateOrderMutation,
 } = api;
 
 export const {
@@ -193,5 +238,6 @@ export const {
   GetProducts,
   GetReviews,
   GetSettings,
+  GetPayments,
   CheckMe,
 } = api.endpoints;

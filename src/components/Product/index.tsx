@@ -24,7 +24,8 @@ function Product({ product } : IProps) {
   } = product || {};
 
   const { data } = useGetSettingsQuery(null);
-  const { currency, buttonText } = data || {};
+
+  const { buttonText, sign } = data || {};
 
   return (
     <Card
@@ -45,7 +46,7 @@ function Product({ product } : IProps) {
           {title}
         </Box>
         <Box sx={styles.price}>
-          {`${price} ${currency}`}
+          {`${price}${sign}`}
         </Box>
       </CardContent>
 

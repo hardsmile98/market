@@ -1,9 +1,9 @@
-import { AdminSettingsPage } from '#/src/screens';
-import { CheckMe, GetPayments, GetSettings } from '#/src/services/api';
+import { AdminOrdersPage } from '#/src/screens';
+import { CheckMe, GetSettings } from '#/src/services/api';
 import { wrapper } from '#/src/store';
 
 function Page() {
-  return <AdminSettingsPage />;
+  return <AdminOrdersPage />;
 }
 
 export default Page;
@@ -23,7 +23,6 @@ export const getServerSideProps = wrapper
 
     await Promise.all([
       dispatch(GetSettings.initiate(null)),
-      dispatch(GetPayments.initiate(null)),
     ]);
 
     return {

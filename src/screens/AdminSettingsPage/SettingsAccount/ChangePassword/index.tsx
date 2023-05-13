@@ -47,6 +47,7 @@ function ChangePassword({ open, onClose }: IProps) {
           value={currentPassword}
           onChange={(e) => setCurrentPassword(e.target.value)}
           placeholder="Текущий пароль"
+          size="small"
           sx={{ mb: 1 }}
         />
 
@@ -55,6 +56,7 @@ function ChangePassword({ open, onClose }: IProps) {
           value={newPassword}
           onChange={(e) => setNewPassword(e.target.value)}
           placeholder="Новый пароль"
+          size="small"
           sx={{ mb: 1 }}
         />
 

@@ -3,7 +3,9 @@ import { useUpdateProductMutation } from '#/src/services/api';
 import { Product } from '#/src/types';
 import { LoadingButton } from '@mui/lab';
 import { Box, TextField } from '@mui/material';
-import { ChangeEvent, useEffect, useState } from 'react';
+import {
+  ChangeEvent, FormEvent, useEffect, useState,
+} from 'react';
 
 interface IProps {
    product: Product
@@ -27,6 +29,15 @@ function Edit({ product, onClose, open }: IProps) {
     isError,
   }] = useUpdateProductMutation();
 
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    update({
+      ...stateProduct,
+      price: Number(stateProduct.price),
+      oldPrice: Number(stateProduct.oldPrice) || undefined,
+    });
+  };
+
   useEffect(() => {
     if (isSuccess) {
       onClose();
@@ -38,7 +49,7 @@ function Edit({ product, onClose, open }: IProps) {
       open={open}
       onClose={onClose}
     >
-      <Box component="form">
+      <Box component="form" onSubmit={handleSubmit}>
         <Box mb={1}>
           Редактирование товара
         </Box>
@@ -91,11 +102,7 @@ function Edit({ product, onClose, open }: IProps) {
           fullWidth
           disabled={isDisabled}
           loading={isLoading}
-          onClick={() => update({
-            ...stateProduct,
-            price: Number(stateProduct.price),
-            oldPrice: Number(stateProduct.oldPrice) || undefined,
-          })}
+          type="submit"
         >
           Сохранить
         </LoadingButton>

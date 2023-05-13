@@ -25,7 +25,8 @@ const styles = {
 
 function List() {
   const { data } = useGetProductsQuery(null);
-  const { items = [], currency } = data || {};
+
+  const { items = [] } = data || {};
 
   return (
     <>
@@ -58,7 +59,6 @@ function List() {
               <Row
                 key={item.id}
                 item={item}
-                currency={currency}
               />
             ))}
           </TableBody>

@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import { useDeleteProductMutation } from '#/src/services/api';
-import { Currency, Product } from '#/src/types';
+import { useDeleteProductMutation, useGetSettingsQuery } from '#/src/services/api';
+import { Product } from '#/src/types';
 import Delete from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import {
@@ -12,22 +12,23 @@ import Edit from './Edit';
 
 interface IProps {
     item: Product
-    currency?: Currency
 }
 
-function Row({ item, currency }: IProps) {
+function Row({ item }: IProps) {
   const [isEditModalOpen, setEditModalOpen] = useState(false);
 
   const handleClose = () => setEditModalOpen(false);
 
   const [deleteProduct, { isLoading }] = useDeleteProductMutation();
 
+  const { data: { sign } = {} } = useGetSettingsQuery(null);
+
   return (
     <>
       <TableRow sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
         <TableCell align="left">{item.title}</TableCell>
         <TableCell align="left">
-          {`${item.price} ${currency}`}
+          {`${item.price}${sign}`}
         </TableCell>
         <TableCell align="right">
           <IconButton

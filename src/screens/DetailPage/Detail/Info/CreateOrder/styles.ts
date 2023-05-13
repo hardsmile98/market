@@ -1,10 +1,14 @@
 const styles = {
-  form: {
-    mt: 2,
+  field: {
+    mt: 1,
+
+    '> div': {
+      mb: 0.5,
+      fontSize: 'body2.fontSize',
+    },
   },
 
   input: {
-    mb: 1.5,
     backgroundColor: 'background.paper',
     borderRadius: 2,
     width: '100%',
@@ -13,17 +17,6 @@ const styles = {
     fieldset: {
       display: 'none',
     },
-  },
-
-  dataText: {
-    color: 'text.secondary',
-    mb: 2,
-  },
-
-  error: {
-    mt: 1,
-    textAlign: 'center',
-    color: 'error.main',
   },
 };
 
