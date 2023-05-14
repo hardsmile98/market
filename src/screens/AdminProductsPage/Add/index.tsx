@@ -15,8 +15,8 @@ import AddImages from './AddImages';
 
 function Add() {
   const [title, setTitle] = useState('');
-  const [price, setPrice] = useState<number | undefined>(undefined);
-  const [oldPrice, setOldPrice] = useState<undefined | number>(undefined);
+  const [price, setPrice] = useState<number>(0);
+  const [oldPrice, setOldPrice] = useState<number>(0);
   const [images, setImages] = useState<Array<string>>(['']);
   const [description, setDescription] = useState('');
 
@@ -106,8 +106,8 @@ function Add() {
           disabled={isDisabled}
           onClick={() => addProduct({
             title,
-            price: Number(price),
-            oldPrice: Number(oldPrice) > 0
+            price,
+            oldPrice: oldPrice > 0
               ? oldPrice
               : undefined,
             description,

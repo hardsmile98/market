@@ -32,6 +32,9 @@ function App({ Component, pageProps, ...rest }: MyAppProps) {
           <title>
             NAME SHOP
           </title>
+
+          <meta name="description" content="Shop name - best shop" />
+          <meta name="keywords" content="shop, shop name" />
         </Head>
 
         <Layout>
