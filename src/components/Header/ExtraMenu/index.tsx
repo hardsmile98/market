@@ -64,6 +64,7 @@ function ExtraMenu() {
         anchorEl={ref.current}
         open={isOpen}
         onClose={handleClose}
+        autoFocus={false}
         anchorOrigin={{
           vertical: 'bottom',
           horizontal: 'left',
