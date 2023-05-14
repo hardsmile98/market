@@ -44,12 +44,11 @@ const styles = {
       alignItems: 'center',
       justifyContent: ['center', 'flex-start'],
       flexWrap: ['wrap', 'nowrap'],
+      mx: [-2, 0],
 
       li: {
-        mt: [1, 1, 0],
-        ':not(:last-of-type)': {
-          mr: [2, 3, 4],
-        },
+        mt: [1.5, 0, 0],
+        mx: 2,
 
         '> a': {
           color: 'inherit',

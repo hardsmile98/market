@@ -21,7 +21,7 @@ function NoAuth() {
         </Box>
       </li>
 
-      <li>
+      <li className="login">
         <Button onClick={() => setOpenModal('login')}>
           <Icon sx={{ mr: 0.5 }} />
           Вход
