@@ -11,8 +11,11 @@ const styles = {
   input: {
     backgroundColor: 'background.paper',
     borderRadius: 2,
-    width: '100%',
     px: 1.5,
+    '& input.Mui-disabled': {
+      color: 'text.primary',
+      WebkitTextFillColor: 'inherit',
+    },
 
     fieldset: {
       display: 'none',

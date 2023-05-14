@@ -3,7 +3,7 @@ import { useCreateOrderMutation, useGetPaymentsQuery, useGetSettingsQuery } from
 import { Product } from '#/src/types';
 import { LoadingButton } from '@mui/lab';
 import {
-  Box, Divider, MenuItem, Select, TextField,
+  Box, MenuItem, Select, TextField,
 } from '@mui/material';
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useState } from 'react';
@@ -76,8 +76,6 @@ function CreateOrder({
           Подтверждение товара
         </Box>
 
-        <Divider sx={{ my: 1 }} />
-
         <Box sx={styles.field}>
           <Box>
             Название товара
@@ -139,9 +137,8 @@ function CreateOrder({
           </Select>
         </Box>
 
-        <Divider sx={{ my: 1 }} />
-
         <LoadingButton
+          sx={{ mt: 1 }}
           fullWidth
           loading={isLoading}
           type="submit"
