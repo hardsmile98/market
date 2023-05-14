@@ -9,28 +9,27 @@ const styles = {
   },
 
   logo: {
-    width: ['100%', 'auto'],
-    textAlign: ['center', 'left'],
+    width: ['100%', '100%', 'auto'],
+    textAlign: ['center', 'center', 'left'],
   },
 
   left: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-between',
-    flexDirection: ['column', 'row'],
+    flexDirection: ['column', 'column', 'row'],
     width: ['100%', '100%', 'auto'],
   },
 
   search: {
-    width: ['100%', 320, 220, 320],
-    order: [1, 0],
+    width: ['100%', '100%', 320],
+    order: [1, 1, 0],
   },
 
   menu: {
-    order: [0, 1],
-    pt: [1, 0],
-    pb: [2, 0],
-    ml: [0, 6],
+    order: [0, 0, 1],
+    pb: [2, 2, 0],
+    ml: [0, 0, 6],
     fontSize: ['body2.fontSize', 'body1.fontSize'],
 
     'ul, li': {
@@ -43,10 +42,13 @@ const styles = {
       color: 'text.secondary',
       display: 'flex',
       alignItems: 'center',
+      justifyContent: ['center', 'flex-start'],
+      flexWrap: ['wrap', 'nowrap'],
 
       li: {
+        mt: [1, 1, 0],
         ':not(:last-of-type)': {
-          mr: [2.5, 4],
+          mr: [2, 3, 4],
         },
 
         '> a': {

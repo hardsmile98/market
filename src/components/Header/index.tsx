@@ -47,6 +47,12 @@ function Header() {
               </Link>
             </li>
 
+            <li>
+              <Link href="/preorder">
+                Предзаказ
+              </Link>
+            </li>
+
             {isAdmin && (
               <li>
                 <Link href="/admin/products">
