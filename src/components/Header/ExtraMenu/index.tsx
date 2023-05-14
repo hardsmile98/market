@@ -59,15 +59,13 @@ function ExtraMenu() {
           horizontal: 'left',
         }}
       >
-        <Box onMouseLeave={handleClose}>
-          <MenuItem onClick={() => handleClickItem('/')}>
-            Предзаказ
-          </MenuItem>
+        <MenuItem onClick={() => handleClickItem('/')}>
+          Предзаказ
+        </MenuItem>
 
-          <MenuItem onClick={() => handleClickItem('/')}>
-            Контакты
-          </MenuItem>
-        </Box>
+        <MenuItem onClick={() => handleClickItem('/')}>
+          Контакты
+        </MenuItem>
       </Menu>
     </>
   );
