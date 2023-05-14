@@ -29,7 +29,11 @@ function ConfirmCancel({ uuid, open, onClose }: IProps) {
           Подтверждение действия
         </Typography>
 
-        <Box my={1} color="text.secondary">
+        <Box
+          mt={1}
+          mb={2}
+          color="text.secondary"
+        >
           Вы действительно хотите отменить заказ?
         </Box>
 
