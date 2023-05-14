@@ -1,16 +1,20 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import ArrowForward from '@mui/icons-material/ArrowForwardIos';
 import { useRef, useState } from 'react';
+import useIsMobile from '#/src/hooks/useIsMobile';
 
 const styles = {
   button: {
     display: 'flex',
     cursor: 'pointer',
+    alignItems: 'center',
   },
 };
 
 function ExtraMenu() {
+  const isMobile = useIsMobile();
   const router = useRouter();
 
   const ref = useRef(null);
@@ -35,13 +39,24 @@ function ExtraMenu() {
         ref={ref}
       >
         Еще
-        <ExpandMoreIcon
-          sx={{
-            transform: isOpen
-              ? 'rotate(180deg)'
-              : 'none',
-          }}
-        />
+        {isMobile
+          ? (
+            <ArrowForward
+              sx={{
+                fontSize: '0.8rem',
+                ml: 0.5,
+              }}
+            />
+          )
+          : (
+            <ExpandMoreIcon
+              sx={{
+                transform: isOpen
+                  ? 'rotate(180deg)'
+                  : 'none',
+              }}
+            />
+          )}
       </Box>
 
       <Menu
