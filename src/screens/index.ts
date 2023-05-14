@@ -6,7 +6,6 @@ import DetailPage from './DetailPage';
 import ProductsPage from './ProductsPage';
 import ReviewsPage from './ReviewsPage';
 import OrderPage from './OrderPage';
-import PreorderPage from './PreorderPage';
 
 export {
   AdminProdutctsPage,
@@ -16,6 +15,5 @@ export {
   ProductsPage,
   DetailPage,
   ReviewsPage,
-  PreorderPage,
   OrderPage,
 };

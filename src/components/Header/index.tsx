@@ -7,6 +7,7 @@ import { logout } from '#/src/store/slices/auth';
 import styles from './styles';
 import Search from './Seach';
 import NoAuth from './NoAuth';
+import ExtraMenu from './ExtraMenu';
 
 function Header() {
   const dispatch = useDispatch();
@@ -48,9 +49,7 @@ function Header() {
             </li>
 
             <li>
-              <Link href="/preorder">
-                Предзаказ
-              </Link>
+              <ExtraMenu />
             </li>
 
             {isAdmin && (
