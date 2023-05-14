@@ -49,7 +49,7 @@ function ExtraMenu() {
         open={isOpen}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'bottom',
+          vertical: 'top',
           horizontal: 'left',
         }}
         transformOrigin={{
