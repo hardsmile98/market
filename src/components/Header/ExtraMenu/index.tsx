@@ -1,7 +1,7 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { useState, MouseEvent } from 'react';
+import { useRef, useState } from 'react';
 
 const styles = {
   button: {
@@ -13,33 +13,32 @@ const styles = {
 function ExtraMenu() {
   const router = useRouter();
 
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
+  const ref = useRef(null);
 
-  const handleClick = (event: MouseEvent<HTMLElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const [isOpen, setOpen] = useState(false);
+
+  const onOpen = () => setOpen(true);
 
   const handleClickItem = (href: string) => {
     router.push(href);
-    setAnchorEl(null);
+    setOpen(false);
   };
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClose = () => setOpen(false);
 
   return (
     <>
       <Box
-        onClick={handleClick}
-        onMouseOver={handleClick}
+        onClick={onOpen}
+        onMouseOver={onOpen}
+        onTouchEnd={onOpen}
         sx={styles.button}
+        ref={ref}
       >
         Еще
         <ExpandMoreIcon
           sx={{
-            transform: open
+            transform: isOpen
               ? 'rotate(180deg)'
               : 'none',
           }}
@@ -47,8 +46,8 @@ function ExtraMenu() {
       </Box>
 
       <Menu
-        anchorEl={anchorEl}
-        open={open}
+        anchorEl={ref.current}
+        open={isOpen}
         onClose={handleClose}
         anchorOrigin={{
           vertical: 'bottom',
