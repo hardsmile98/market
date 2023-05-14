@@ -1,6 +1,14 @@
 import { Box, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { useState, MouseEvent } from 'react';
+
+const styles = {
+  button: {
+    display: 'flex',
+    cursor: 'pointer',
+  },
+};
 
 function ExtraMenu() {
   const router = useRouter();
@@ -23,8 +31,19 @@ function ExtraMenu() {
 
   return (
     <>
-      <Box onClick={handleClick}>
+      <Box
+        onClick={handleClick}
+        onMouseOver={handleClick}
+        sx={styles.button}
+      >
         Еще
+        <ExpandMoreIcon
+          sx={{
+            transform: open
+              ? 'rotate(180deg)'
+              : 'none',
+          }}
+        />
       </Box>
 
       <Menu
@@ -40,13 +59,15 @@ function ExtraMenu() {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={() => handleClickItem('/')}>
-          Предзаказ
-        </MenuItem>
+        <Box onMouseLeave={handleClose}>
+          <MenuItem onClick={() => handleClickItem('/')}>
+            Предзаказ
+          </MenuItem>
 
-        <MenuItem onClick={() => handleClickItem('/')}>
-          Контакты
-        </MenuItem>
+          <MenuItem onClick={() => handleClickItem('/')}>
+            Контакты
+          </MenuItem>
+        </Box>
       </Menu>
     </>
   );
