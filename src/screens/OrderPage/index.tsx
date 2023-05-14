@@ -170,14 +170,15 @@ function OrderPage() {
             />
           </Box>
 
-          <LoadingButton
-            fullWidth
-            loading={isLoading}
-            disabled={status !== 'await'}
-            onClick={() => cancelOrder({ uuid: String(uuid) })}
-          >
-            Отменить заказ
-          </LoadingButton>
+          {status === 'await' && (
+            <LoadingButton
+              fullWidth
+              loading={isLoading}
+              onClick={() => cancelOrder({ uuid: String(uuid) })}
+            >
+              Отменить заказ
+            </LoadingButton>
+          )}
         </Box>
       </Box>
     </Box>
