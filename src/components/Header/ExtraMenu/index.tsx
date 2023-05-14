@@ -58,6 +58,7 @@ function ExtraMenu() {
           vertical: 'top',
           horizontal: 'left',
         }}
+        MenuListProps={{ onMouseLeave: handleClose }}
       >
         <MenuItem onClick={() => handleClickItem('/')}>
           Предзаказ
