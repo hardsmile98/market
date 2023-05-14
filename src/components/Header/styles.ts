@@ -18,7 +18,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'space-between',
     flexDirection: ['column', 'column', 'row'],
-    width: ['100%', '100%', 'auto'],
+    width: ['100%', '100%', '100%', 'auto'],
   },
 
   search: {
