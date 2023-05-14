@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
-import React from 'react';
+import List from './List';
 
 function AdminOrdersPage() {
   return (
-    <Box>
-      123123123
+    <Box mb={5}>
+      <List />
     </Box>
   );
 }

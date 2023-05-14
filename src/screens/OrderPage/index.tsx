@@ -5,18 +5,64 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import {
+  useCancelOrderMutation,
+  useGetOrderQuery,
+  useGetSettingsQuery,
+} from '#/src/services/api';
+import { useRouter } from 'next/router';
+import { Status } from '#/src/types';
 import styles from './styles';
 
+const getStatusText = (status: Status | undefined) => {
+  switch (status) {
+    case 'await':
+      return 'ожидает оплаты';
+    case 'cancel':
+      return 'заказ отменен';
+    case 'paid':
+      return 'заказ оплачен';
+    default:
+      return '';
+  }
+};
+
 function OrderPage() {
+  const { query } = useRouter();
+  const { uuid } = query;
+
+  const { data: { sign } = {} } = useGetSettingsQuery(null);
+  const { data: { order } = {}, isError } = useGetOrderQuery({ uuid: String(uuid) });
+
+  const {
+    number,
+    status,
+    payment,
+    product,
+    total,
+    createdAt,
+  } = order || {};
+
+  const { name, requisites } = payment || {};
+  const { title } = product || {};
+
+  const [cancelOrder, { isLoading }] = useCancelOrderMutation();
+
+  if (isError) {
+    return <div>Такого заказа не существует</div>;
+  }
+
   return (
     <Box mb={5}>
       <Box>
         <Typography variant="h4" mb={1}>
-          Заказ №23
+          Заказ №
+          {number}
         </Typography>
 
         <Typography variant="h5">
-          Статус:  ожидает оплаты
+          {'Статус: '}
+          {getStatusText(status)}
         </Typography>
       </Box>
 
@@ -35,12 +81,23 @@ function OrderPage() {
 
           <Box>
             <Box sx={styles.label}>
+              Способ оплаты
+            </Box>
+            <TextField
+              sx={styles.input}
+              disabled
+              value={name}
+            />
+          </Box>
+
+          <Box>
+            <Box sx={styles.label}>
               Кошелек для оплаты
             </Box>
             <TextField
               sx={styles.input}
               disabled
-              value="2202 2064 1791 1588"
+              value={requisites}
             />
           </Box>
 
@@ -51,17 +108,21 @@ function OrderPage() {
             <TextField
               sx={styles.input}
               disabled
-              value="400"
+              value={total}
             />
           </Box>
 
-          <Box sx={styles.qr}>
-            <QRCode value="2131231" />
-          </Box>
+          {requisites && (
+            <Box sx={styles.qr}>
+              <QRCode value={requisites} />
+            </Box>
+          )}
 
-          <LoadingButton fullWidth>
-            Я оплатил
-          </LoadingButton>
+          {status === 'await' && (
+            <LoadingButton fullWidth>
+              Я оплатил
+            </LoadingButton>
+          )}
         </Box>
 
         <Box sx={{
@@ -83,7 +144,7 @@ function OrderPage() {
             <TextField
               sx={styles.input}
               disabled
-              value="product 1"
+              value={title}
             />
           </Box>
 
@@ -94,7 +155,7 @@ function OrderPage() {
             <TextField
               sx={styles.input}
               disabled
-              value="100 $"
+              value={`${total} ${sign}`}
             />
           </Box>
 
@@ -105,11 +166,16 @@ function OrderPage() {
             <TextField
               sx={styles.input}
               disabled
-              value="13 мая 2023 г., 18:01"
+              value={createdAt}
             />
           </Box>
 
-          <LoadingButton fullWidth>
+          <LoadingButton
+            fullWidth
+            loading={isLoading}
+            disabled={status !== 'await'}
+            onClick={() => cancelOrder({ uuid: String(uuid) })}
+          >
             Отменить заказ
           </LoadingButton>
         </Box>

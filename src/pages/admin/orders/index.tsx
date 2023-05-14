@@ -1,5 +1,5 @@
 import { AdminOrdersPage } from '#/src/screens';
-import { CheckMe, GetSettings } from '#/src/services/api';
+import { CheckMe, GetOrders, GetSettings } from '#/src/services/api';
 import { wrapper } from '#/src/store';
 
 function Page() {
@@ -23,6 +23,7 @@ export const getServerSideProps = wrapper
 
     await Promise.all([
       dispatch(GetSettings.initiate(null)),
+      dispatch(GetOrders.initiate(null)),
     ]);
 
     return {

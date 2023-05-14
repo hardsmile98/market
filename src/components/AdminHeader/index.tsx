@@ -28,11 +28,11 @@ function AdminHeader() {
               Товары
             </Link>
           </li>
-          {/* <li>
+          <li>
             <Link href="/admin/orders">
               Заказы
             </Link>
-          </li> */}
+          </li>
           <li>
             <Link href="/admin/reviews">
               Отзывы

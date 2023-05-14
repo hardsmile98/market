@@ -1,5 +1,10 @@
 import { OrderPage } from '#/src/screens';
-import { CheckMe, GetProducts, GetSettings } from '#/src/services/api';
+import {
+  CheckMe,
+  GetOrder,
+  GetProducts,
+  GetSettings,
+} from '#/src/services/api';
 import { wrapper } from '#/src/store';
 import { setRole } from '#/src/store/slices/auth';
 import React from 'react';
@@ -14,16 +19,17 @@ export default Page;
 Page.Layout = 'Main';
 
 export const getServerSideProps = wrapper
-  .getServerSideProps(({ dispatch }) => async ({ req }) => {
+  .getServerSideProps(({ dispatch }) => async ({ req, query }) => {
     const { data, isSuccess } = await dispatch(CheckMe.initiate(null));
 
     if (isSuccess && data) {
       dispatch(setRole(data));
     }
 
-    // const { id } = query;
+    const { uuid } = query;
 
     await Promise.all([
+      dispatch(GetOrder.initiate({ uuid: String(uuid) })),
       dispatch(GetProducts.initiate(null)),
       dispatch(GetSettings.initiate(null)),
     ]);

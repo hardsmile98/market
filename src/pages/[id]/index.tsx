@@ -29,7 +29,7 @@ export const getServerSideProps = wrapper
     await Promise.all([
       dispatch(GetPayments.initiate(null)),
       dispatch(GetProducts.initiate(null)),
-      dispatch(GetProduct.initiate({ id: String(id) })),
+      dispatch(GetProduct.initiate({ id: Number(id) })),
       dispatch(GetSettings.initiate(null)),
     ]);
 

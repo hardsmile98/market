@@ -9,7 +9,7 @@ interface IProps {
 }
 
 function Detail({ id }: IProps) {
-  const { data, isLoading } = useGetProductQuery({ id: String(id) });
+  const { data, isLoading } = useGetProductQuery({ id: Number(id) });
   const { item } = data || {};
 
   if (isLoading) {

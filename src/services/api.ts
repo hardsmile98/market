@@ -15,15 +15,20 @@ import {
   CreateOrderDto,
   CreatePaymentDto,
   CreatingOrder,
+  OrderDetail,
+  Orders,
   Payment,
   ProductDto,
   ProductQuery,
   Products,
   Settings,
+  UpdateOrderDto,
 } from '../types';
 import tagTypes from './tagTypes';
 import {
-  transformGetReviews, transformSettings,
+  transformGetReviews,
+  transformSettings,
+  tranformOrder,
 } from './transformResponse';
 
 const createApi = buildCreateApi(
@@ -139,7 +144,7 @@ export const api = createApi({
       invalidatesTags: [tagTypes.products],
     }),
 
-    GetProduct: builder.query<ProductQuery, { id: string }>({
+    GetProduct: builder.query<ProductQuery, { id: number }>({
       query: ({ id }) => ({
         url: `products/${id}`,
       }),
@@ -202,6 +207,48 @@ export const api = createApi({
       }),
       invalidatesTags: [tagTypes.orders],
     }),
+
+    GetOrder: builder.query<OrderDetail, { uuid: string }>({
+      query: ({ uuid }) => ({
+        url: `orders/${uuid}`,
+      }),
+      transformResponse: tranformOrder,
+      providesTags: [tagTypes.order],
+    }),
+
+    UpdateOrder: builder.mutation<null, UpdateOrderDto>({
+      query: (dto) => ({
+        url: 'orders/update',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.orders],
+    }),
+
+    DeleteOrder: builder.mutation<null, { uuid: string }>({
+      query: (dto) => ({
+        url: 'orders',
+        method: 'DELETE',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.orders],
+    }),
+
+    GetOrders: builder.query<Orders, null>({
+      query: () => ({
+        url: 'orders',
+      }),
+      providesTags: [tagTypes.orders],
+    }),
+
+    CancelOrder: builder.mutation<null, { uuid: string }>({
+      query: (dto) => ({
+        url: 'orders/cancel',
+        method: 'POST',
+        body: dto,
+      }),
+      invalidatesTags: [tagTypes.order, tagTypes.orders],
+    }),
   }),
   tagTypes: Object.values(tagTypes),
 });
@@ -231,6 +278,11 @@ export const {
   useDeletePaymentMutation,
 
   useCreateOrderMutation,
+  useCancelOrderMutation,
+  useDeleteOrderMutation,
+  useUpdateOrderMutation,
+  useGetOrderQuery,
+  useGetOrdersQuery,
 } = api;
 
 export const {
@@ -239,5 +291,7 @@ export const {
   GetReviews,
   GetSettings,
   GetPayments,
+  GetOrder,
+  GetOrders,
   CheckMe,
 } = api.endpoints;
