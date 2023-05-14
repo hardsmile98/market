@@ -31,7 +31,6 @@ function ExtraMenu() {
       <Box
         onClick={onOpen}
         onMouseOver={onOpen}
-        onTouchEnd={onOpen}
         sx={styles.button}
         ref={ref}
       >
